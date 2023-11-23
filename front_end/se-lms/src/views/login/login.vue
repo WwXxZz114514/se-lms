@@ -1,5 +1,5 @@
 <template>
-  <div>hello login</div>
+  <div>hi login</div>
 </template>
 
 <script lang="ts"></script>
