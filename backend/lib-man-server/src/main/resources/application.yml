@@ -1,0 +1,33 @@
+server:
+  port: 8080
+#  ssl:
+  #  certificate: "classpath:my-cert.crt"
+  #  certificate-private-key: "classpath:my-cert.key"
+  #  trust-certificate: "classpath:ca-cert.crt"
+  servlet:
+    session:
+      timeout: 60 # sec
+
+# 开发环境使用H2
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+# H2的Web控制台
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+mybatis:
+  type-aliases-package: com.szuse.f4.model
+
+logging:
+  level:
+    org.springframework.web: "debug"
+    org.hibernate: "error"
+  file:
+    name: libman.log

@@ -1,0 +1,19 @@
+2023-12-25T21:04:43.549+08:00  INFO 12400 --- [main] com.szuse.f4.LibManServerApplication     : Starting LibManServerApplication using Java 18.0.2.1 with PID 12400 (C:\Users\user\Downloads\se\lib-man-server\target\classes started by user in C:\Users\user\Downloads\se\lib-man-server)
+2023-12-25T21:04:43.551+08:00  INFO 12400 --- [main] com.szuse.f4.LibManServerApplication     : No active profile set, falling back to 1 default profile: "default"
+2023-12-25T21:04:44.110+08:00  INFO 12400 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-12-25T21:04:44.117+08:00  INFO 12400 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-25T21:04:44.117+08:00  INFO 12400 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
+2023-12-25T21:04:44.220+08:00  INFO 12400 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-25T21:04:44.220+08:00  INFO 12400 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 642 ms
+2023-12-25T21:04:44.237+08:00  INFO 12400 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-25T21:04:44.338+08:00  INFO 12400 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2023-12-25T21:04:44.340+08:00  INFO 12400 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-25T21:04:44.347+08:00  INFO 12400 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:mem:testdb'
+2023-12-25T21:04:44.502+08:00 DEBUG 12400 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-12-25T21:04:44.548+08:00 DEBUG 12400 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 10 mappings in 'requestMappingHandlerMapping'
+2023-12-25T21:04:44.558+08:00 DEBUG 12400 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-12-25T21:04:44.563+08:00 DEBUG 12400 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-12-25T21:04:44.609+08:00  INFO 12400 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-12-25T21:04:44.615+08:00  INFO 12400 --- [main] com.szuse.f4.LibManServerApplication     : Started LibManServerApplication in 1.331 seconds (process running for 1.545)
+2023-12-25T21:04:47.269+08:00  INFO 12400 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-25T21:04:47.271+08:00  INFO 12400 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
