@@ -1,8 +1,8 @@
 <template>
     <div class="activity-area" :style="{ width:seatAreaWidthRem + 'rem',height:seatAreaHeightRem + 'rem'}">
-      <div class="screen">
+      <!-- <div class="screen">
         <div class="screen-text">屏幕方向</div>
-      </div>
+      </div> -->
       <div class="thumbnail" v-show="thumbnailShow" :style="{ transform: 'scale('+seatScale+')',width:thumbnailWidthRem + 'rem',height:thumbnailHeighthRem + 'rem'}">
         <!--红色外框开始-->
         <div class="thumbnail-border" :style="{transform: 'scale('+scalereciprocal+')',top:topthumbnail + 'rem',left:leftthumbnail + 'rem'}">

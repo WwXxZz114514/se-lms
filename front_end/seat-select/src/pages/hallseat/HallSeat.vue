@@ -85,7 +85,7 @@ export default {
       thumbnailPositionDistin: 0.15, // 缩略图每个座位偏移距离
       seatAreaWidthRem: 10, // 座位区域横向rem最大值 用于和 seatAreaHeightRem 共同计算区域缩放比例
       selectedSeatList: [], // 已选择座位
-      maxSelect: 4, // 最大选择座位数量 改动可改变最大选择座位数
+      maxSelect: 2, // 最大选择座位数量 改动可改变最大选择座位数
       load: false // 加载dom的控制
     }
   },
@@ -132,28 +132,28 @@ export default {
             // 获取座位的类型的首字母
             let firstNumber = element.type.substr(0, 1)
             // 在原来的对象中加入两个属性  otherLoveSeatIndex 对应情侣座位的原数组下标 otherLoveSeatId  对应情侣座位的Id
-            element.otherLoveSeatIndex = null
-            element.otherLoveSeatId = null
+            // element.otherLoveSeatIndex = null
+            // element.otherLoveSeatId = null
             // 座位的类型的首字母为 '1' 是情侣首座 处理情侣首座位
-            if (firstNumber === '1') {
-              for (const index in resSeatList) {
-                if (resSeatList[index].gRow === element.gRow &&
-                  resSeatList[index].gCol === element.gCol + 1) {
-                  element.otherLoveSeatIndex = index
-                  element.otherLoveSeatId = resSeatList[index].id
-                }
-              }
-            }
-            // 座位的类型的首字母为 '2' 是情侣次座 处理情侣次座位
-            if (firstNumber === '2') {
-              for (const index in resSeatList) {
-                if (resSeatList[index].gRow === element.gRow &&
-                  resSeatList[index].gCol === element.gCol - 1) {
-                  element.otherLoveSeatIndex = index
-                  element.otherLoveSeatId = resSeatList[index].id
-                }
-              }
-            }
+            // if (firstNumber === '1') {
+            //   for (const index in resSeatList) {
+            //     if (resSeatList[index].gRow === element.gRow &&
+            //       resSeatList[index].gCol === element.gCol + 1) {
+            //       element.otherLoveSeatIndex = index
+            //       element.otherLoveSeatId = resSeatList[index].id
+            //     }
+            //   }
+            // }
+            // // 座位的类型的首字母为 '2' 是情侣次座 处理情侣次座位
+            // if (firstNumber === '2') {
+            //   for (const index in resSeatList) {
+            //     if (resSeatList[index].gRow === element.gRow &&
+            //       resSeatList[index].gCol === element.gCol - 1) {
+            //       element.otherLoveSeatIndex = index
+            //       element.otherLoveSeatId = resSeatList[index].id
+            //     }
+            //   }
+            // }
             // 加载座位的图标
             for (const item of response.seatTypeList) {
               // 加载每个座位的初始图标defautIcon 和 当前图标 nowIcon
@@ -209,33 +209,33 @@ export default {
     // 处理已选的座位
     processSelected: function (index) {
       let _selectedSeatList = this.selectedSeatList
-      let otherLoveSeatIndex = this.seatList[index].otherLoveSeatIndex
-      if (otherLoveSeatIndex !== null) {
-        // 如果是情侣座位
-        // 改变这些座位的图标为初始图标
-        this.$set(this.seatList[index], 'nowIcon', this.seatList[index].defautIcon)
-        this.$set(this.seatList[otherLoveSeatIndex], 'nowIcon', this.seatList[otherLoveSeatIndex].defautIcon)
-        for (const key in _selectedSeatList) {
-          // 移除id一样的座位
-          if (_selectedSeatList[key].id === this.seatList[index].id) {
-            _selectedSeatList.splice(key, 1)
-          }
-        }
-        // 移除对应情侣座位
-        for (const key in _selectedSeatList) {
-          if (_selectedSeatList[key].id === this.seatList[otherLoveSeatIndex].id) {
-            _selectedSeatList.splice(key, 1)
-          }
-        }
-      } else {
-        // 改变这些座位的图标为初始图标 并 移除id一样的座位
-        this.$set(this.seatList[index], 'nowIcon', this.seatList[index].defautIcon)
-        for (const key in _selectedSeatList) {
-          if (_selectedSeatList[key].id === this.seatList[index].id) {
-            _selectedSeatList.splice(key, 1)
-          }
+      // let otherLoveSeatIndex = this.seatList[index].otherLoveSeatIndex
+      // if (otherLoveSeatIndex !== null) {
+      //   // 如果是情侣座位
+      //   // 改变这些座位的图标为初始图标
+      //   this.$set(this.seatList[index], 'nowIcon', this.seatList[index].defautIcon)
+      //   this.$set(this.seatList[otherLoveSeatIndex], 'nowIcon', this.seatList[otherLoveSeatIndex].defautIcon)
+      //   for (const key in _selectedSeatList) {
+      //     // 移除id一样的座位
+      //     if (_selectedSeatList[key].id === this.seatList[index].id) {
+      //       _selectedSeatList.splice(key, 1)
+      //     }
+      //   }
+      //   // 移除对应情侣座位
+      //   for (const key in _selectedSeatList) {
+      //     if (_selectedSeatList[key].id === this.seatList[otherLoveSeatIndex].id) {
+      //       _selectedSeatList.splice(key, 1)
+      //     }
+      //   }
+      // } else {
+      // 改变这些座位的图标为初始图标 并 移除id一样的座位
+      this.$set(this.seatList[index], 'nowIcon', this.seatList[index].defautIcon)
+      for (const key in _selectedSeatList) {
+        if (_selectedSeatList[key].id === this.seatList[index].id) {
+          _selectedSeatList.splice(key, 1)
         }
       }
+      // }
     },
     // 处理未选择的座位
     processUnSelected: function (index) {
@@ -249,35 +249,35 @@ export default {
         this.$refs.seatArea.changePosition(top, left)
       }
       let _selectedSeatList = this.selectedSeatList
-      let otherLoveSeatIndex = this.seatList[index].otherLoveSeatIndex
-      if (otherLoveSeatIndex !== null) {
-        // 如果选中的是情侣座位 判断选择个数不大于 maxSelect
-        if (_selectedSeatList.length >= this.maxSelect - 1) {
-          alert('最多只能选择' + this.maxSelect + '个座位哦~')
-          return
-        }
-        // 改变这些座位的图标为已选择图标
-        this.$set(this.seatList[index], 'nowIcon', this.seatList[index].selectedIcon)
-        this.$set(this.seatList[otherLoveSeatIndex], 'nowIcon', this.seatList[otherLoveSeatIndex].selectedIcon)
-        // 记录 orgIndex属性 是原seatList数组中的下标值
-        this.seatList[index].orgIndex = index
-        this.seatList[otherLoveSeatIndex].orgIndex = otherLoveSeatIndex
-        // 把选择的座位放入到已选座位数组中
-        _selectedSeatList.push(this.seatList[index])
-        _selectedSeatList.push(this.seatList[otherLoveSeatIndex])
-      } else {
-        // 如果选中的是非情侣座位 判断选择个数不大于 maxSelect
-        if (_selectedSeatList.length >= this.maxSelect) {
-          alert('最多只能选择' + this.maxSelect + '个座位哦~')
-          return
-        }
-        // 改变这些座位的图标为已选择图标
-        this.$set(this.seatList[index], 'nowIcon', this.seatList[index].selectedIcon)
-        // 记录 orgIndex属性 是原seatList数组中的下标值
-        this.seatList[index].orgIndex = index
-        // 把选择的座位放入到已选座位数组中
-        _selectedSeatList.push(this.seatList[index])
+      // let otherLoveSeatIndex = this.seatList[index].otherLoveSeatIndex
+      // if (otherLoveSeatIndex !== null) {
+      //   // 如果选中的是情侣座位 判断选择个数不大于 maxSelect
+      //   if (_selectedSeatList.length >= this.maxSelect - 1) {
+      //     alert('最多只能选择' + this.maxSelect + '个座位哦~')
+      //     return
+      //   }
+      //   // 改变这些座位的图标为已选择图标
+      //   this.$set(this.seatList[index], 'nowIcon', this.seatList[index].selectedIcon)
+      //   this.$set(this.seatList[otherLoveSeatIndex], 'nowIcon', this.seatList[otherLoveSeatIndex].selectedIcon)
+      //   // 记录 orgIndex属性 是原seatList数组中的下标值
+      //   this.seatList[index].orgIndex = index
+      //   this.seatList[otherLoveSeatIndex].orgIndex = otherLoveSeatIndex
+      //   // 把选择的座位放入到已选座位数组中
+      //   _selectedSeatList.push(this.seatList[index])
+      //   _selectedSeatList.push(this.seatList[otherLoveSeatIndex])
+      // } else {
+      // 如果选中的是非情侣座位 判断选择个数不大于 maxSelect
+      if (_selectedSeatList.length >= this.maxSelect) {
+        alert('最多只能选择' + this.maxSelect + '个座位哦~')
+        return
       }
+      // 改变这些座位的图标为已选择图标
+      this.$set(this.seatList[index], 'nowIcon', this.seatList[index].selectedIcon)
+      // 记录 orgIndex属性 是原seatList数组中的下标值
+      this.seatList[index].orgIndex = index
+      // 把选择的座位放入到已选座位数组中
+      _selectedSeatList.push(this.seatList[index])
+      // }
     },
     back: function () {
       this.$router.go(-1)
@@ -369,7 +369,8 @@ export default {
     },
     // 快速选择和选择座位组件component on-bind:is的值
     selectedTabComponents: function () {
-      return this.selectedSeatList.length > 0 ? 'SelectedTab' : 'QuickSelectTab'
+      // return this.selectedSeatList.length > 0 ? 'SelectedTab' : 'QuickSelectTab'
+      return 'SelectedTab'
     },
     // 座位左边栏的数组
     seatToolArr: function () {

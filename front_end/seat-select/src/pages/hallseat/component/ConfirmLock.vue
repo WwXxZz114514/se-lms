@@ -101,11 +101,11 @@ export default {
       const checkNum = 2 + this.selectedSeat.length - 1
       const gRowBasic = element.gRow
       const gColBasic = element.gCol
-      let otherLoveSeatIndex = element.otherLoveSeatIndex
-      if (otherLoveSeatIndex != null) {
-        // 如果是情侣座 不检测
-        return true
-      }
+      // let otherLoveSeatIndex = element.otherLoveSeatIndex
+      // if (otherLoveSeatIndex != null) {
+      //   // 如果是情侣座 不检测
+      //   return true
+      // }
       // 检查座位左侧
       let left = this.checkSeatDirection(gRowBasic, gColBasic, checkNum, '-')
       // 如果左侧已经检查出是靠着过道直接 返回true

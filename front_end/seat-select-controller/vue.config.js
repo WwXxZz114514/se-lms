@@ -1,3 +1,4 @@
+const UnoCSS = require('@unocss/webpack').default
 module.exports = {
   // 基本路径
   publicPath: '/',
@@ -7,6 +8,10 @@ module.exports = {
       stylus: {
         javascriptEnabled: true
       }
+    },
+    extract: {
+      filename: '[name].[hash:9].css',
+      ignoreOrder: true
     }
   },
   devServer: {
@@ -20,5 +25,8 @@ module.exports = {
         }
       }
     }
+  },
+  configureWebpack: {
+    plugins: [UnoCSS()]
   }
 }

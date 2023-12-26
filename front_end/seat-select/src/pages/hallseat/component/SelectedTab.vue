@@ -4,7 +4,7 @@
     <div class="scroll" ref="scroll">
       <ul class="scroll-ul" ref="scrollUl">
         <li class="scroll-item" v-for="item in selectedSeat" :key="'select'+item.id" @click="cancelSelect(item)">
-          {{item.row}}排{{item.col}}座 {{item.price}}元
+          {{item.row}}排{{item.col}}座
         </li>
       </ul>
     </div>
