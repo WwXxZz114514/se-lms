@@ -11,6 +11,11 @@ export default new Router({
       path: '/',
       name: 'HallSeat',
       component: HallSeat
+    },
+    {
+      path: '/login',
+      name: 'Login ',
+      component: () => import('@/pages/login/index.vue')
     }
   ]
 })
