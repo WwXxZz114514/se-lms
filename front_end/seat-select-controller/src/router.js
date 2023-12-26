@@ -20,6 +20,11 @@ export default new Router({
         console.log('hello')
         next(false)
       }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/pages/login/index.vue')
     }
   ]
 })

@@ -5,24 +5,49 @@
       <div class="inputData">
         <div>
           卡号：
-          <input class="input" type="text" placeholder="请输入卡号" />
+          <input v-model="cardNumber" class="input" type="text" placeholder="请输入卡号" />
         </div>
         <div>
           密码：
-          <input class="input" type="text" placeholder="请输入密码" />
+          <input v-model="password" class="input" type="text" placeholder="请输入密码" />
         </div>
       </div>
       <div class="login-free">
-        <input type="checkbox" id="loginFree" name="loginFree" value="loginFree">
+        <input v-model="isLoginFree" type="checkbox" id="loginFree" name="loginFree" value="loginFree">
         <label for="loginFree" style="margin-left: 4px;">一周内免登录</label><br>
       </div>
       <div>
-        <button class="btn">登录</button>
+        <button class="btn" @click="login">登录</button>
       </div>
     </div>
   </div>
 </template>
-<script setup>
+<script>
+export default {
+  data () {
+    return {
+      cardNumber: '',
+      password: '',
+      isLoginFree: false
+    }
+  },
+  methods: {
+    login () {
+      this.$post('/api/login', {
+        cardNumber: this.cardNumber,
+        password: this.password,
+        isLoginFree: this.isLoginFree
+      }).then(res => {
+        if (res.code === 200) {
+          this.$router.push('/')
+        } else {
+          // this.$message.error(res.msg)
+        }
+      })
+    }
+  }
+
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped="scoped">
