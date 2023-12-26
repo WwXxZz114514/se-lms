@@ -2,10 +2,13 @@ package com.szuse.f4.controller;
 
 import com.szuse.f4.model.Admin;
 import com.szuse.f4.mapper.AdminMapper;
+import com.szuse.f4.common.exception.BadRequestException;
+import com.szuse.f4.common.exception.UnauthorizedException;
+import com.szuse.f4.common.ResponseJSON;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -16,65 +19,65 @@ public class AdminController {
   private AdminMapper adminMapper;
 
   @PostMapping("/admin/login")
-  public String login(HttpServletRequest request,
-                      @RequestParam("username") String username,
-                      @RequestParam("tel") String tel,
+  public ResponseJSON login(HttpServletRequest request,
+                      HttpServletRequest response,
+                      @RequestParam("adminname") String adminname,
                       @RequestParam("password") String password) {
-    if (username == null || tel == null || password == null) {
-      return "Invalid parameters";
+    
+    if (adminname == null || password == null) {
+      throw new BadRequestException("Invalid parameters");
     }
     if (request.getSession().getAttribute("admin") != null) {
-      return "Already logged in";
+      throw new BadRequestException("Already logged in");
     }
-    Admin u = adminMapper.getAdminByUsername(username);
-    if (u != null && u.getPassword().equals(password)) {
-      request.getSession().setAttribute("admin", u);
-      return "success";
+    Admin u = adminMapper.getAdminByUsername(adminname);
+    if (u == null || !u.getPassword().equals(password)) {
+      throw new BadRequestException("Invalid adminname or password");
     }
-    return "Wrong UID or password";
+    request.getSession().setAttribute("admin", u);
+    return new ResponseJSON(0, "success");
   }
 
   @PostMapping("/admin/register")
-  public String register(@RequestParam("username") String username,
+  public ResponseJSON register(@RequestParam("adminname") String adminname,
                          @RequestParam("tel") String tel,
                          @RequestParam("password") String password) {
-    Admin u = adminMapper.getAdminByUsername(username);
+    Admin u = adminMapper.getAdminByUsername(adminname);
     if (u != null) {
-      return "Admin already exists";
+      throw new BadRequestException("Admin already exists");
     }
     Admin newAdmin = new Admin();
-    newAdmin.setUsername(username);
+    newAdmin.setUsername(adminname);
     newAdmin.setTel(tel);
     newAdmin.setPassword(password);
     adminMapper.insertAdmin(newAdmin);
-    return "success";
+    return new ResponseJSON(0, "success");
   }
 
   @PostMapping("/admin/change-password")
-  public String changePassword(HttpServletRequest request,
-                               @RequestParam("username") String username,
+  public ResponseJSON changePassword(HttpServletRequest request,
+                               @RequestParam("adminname") String adminname,
                                @RequestParam("oldPassword") String oldPassword,
                                @RequestParam("newPassword") String newPassword) {
-    Admin u = adminMapper.getAdminByUsername(username);
+    Admin u = adminMapper.getAdminByUsername(adminname);
     if (request.getSession().getAttribute("admin") == null) {
-      return "Not logged in";
+      throw new UnauthorizedException("Not logged in");
     }
     if (u == null) {
-      return "Admin does not exist";
+      throw new BadRequestException("Admin does not exist");
     }
     if (!u.getPassword().equals(oldPassword)) {
-      return "Wrong password";
+      throw new BadRequestException("Invalid password");
     }
     u.setPassword(newPassword);
     adminMapper.updatePassword(u);
-    return "success";
+    return new ResponseJSON(0, "success");
   }
 
   @PostMapping("/admin/logout")
-  public String logout(HttpServletRequest request) {
+  public ResponseJSON logout(HttpServletRequest request) {
     request.getSession().removeAttribute("admin");
-    return "success";
+    return new ResponseJSON(0, "success");
   }
-
 
 }
