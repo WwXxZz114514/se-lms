@@ -21,33 +21,33 @@ public class AdminController {
   @PostMapping("/admin/login")
   public ResponseJSON login(HttpServletRequest request,
                       HttpServletRequest response,
-                      @RequestParam("adminname") String adminname,
+                      @RequestParam("username") String username,
                       @RequestParam("password") String password) {
     
-    if (adminname == null || password == null) {
+    if (username == null || password == null) {
       throw new BadRequestException("Invalid parameters");
     }
     if (request.getSession().getAttribute("admin") != null) {
       throw new BadRequestException("Already logged in");
     }
-    Admin u = adminMapper.getAdminByUsername(adminname);
+    Admin u = adminMapper.getAdminByUsername(username);
     if (u == null || !u.getPassword().equals(password)) {
-      throw new BadRequestException("Invalid adminname or password");
+      throw new BadRequestException("Invalid username or password");
     }
     request.getSession().setAttribute("admin", u);
     return new ResponseJSON(0, "success");
   }
 
   @PostMapping("/admin/register")
-  public ResponseJSON register(@RequestParam("adminname") String adminname,
+  public ResponseJSON register(@RequestParam("username") String username,
                          @RequestParam("tel") String tel,
                          @RequestParam("password") String password) {
-    Admin u = adminMapper.getAdminByUsername(adminname);
+    Admin u = adminMapper.getAdminByUsername(username);
     if (u != null) {
       throw new BadRequestException("Admin already exists");
     }
     Admin newAdmin = new Admin();
-    newAdmin.setUsername(adminname);
+    newAdmin.setUsername(username);
     newAdmin.setTel(tel);
     newAdmin.setPassword(password);
     adminMapper.insertAdmin(newAdmin);
@@ -56,10 +56,10 @@ public class AdminController {
 
   @PostMapping("/admin/change-password")
   public ResponseJSON changePassword(HttpServletRequest request,
-                               @RequestParam("adminname") String adminname,
+                               @RequestParam("username") String username,
                                @RequestParam("oldPassword") String oldPassword,
                                @RequestParam("newPassword") String newPassword) {
-    Admin u = adminMapper.getAdminByUsername(adminname);
+    Admin u = adminMapper.getAdminByUsername(username);
     if (request.getSession().getAttribute("admin") == null) {
       throw new UnauthorizedException("Not logged in");
     }

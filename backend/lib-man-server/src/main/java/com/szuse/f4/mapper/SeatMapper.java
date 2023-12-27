@@ -8,20 +8,25 @@ import com.szuse.f4.model.Seat;
 
 public interface SeatMapper {
 
-    @Select("SELECT * FROM tb_user WHERE username = #{username}")
+    @Select("SELECT * FROM tb_seat WHERE seat_id = #{seatId}")
     @Results({
-            @Result(property = "id", column = "id"),
-            @Result(property = "username", column = "username"),
-            @Result(property = "tel", column = "tel"),
-            @Result(property = "password", column = "password"),
-            @Result(property = "createTime", column = "create_time")
+        @Result(property = "seatId", column = "seat_id"),
+        @Result(property = "seatRow", column = "seat_row"),
+        @Result(property = "seatCol", column = "seat_col"),
+        @Result(property = "areaId", column = "area_id")
     })
-    Seat getSeatBySeatname(String username);
+    Seat getSeatBySeatId(int seatId);
 
-    @Update("INSERT INTO tb_user (username, tel, password) VALUES (#{username}, #{tel}, #{password})")
+    @Update("INSERT INTO tb_seat (seat_row, seat_col, area_id) VALUES (#{seatRow}, #{seatCol}, #{areaId})")
     void insertSeat(Seat seat);
 
-    @Update("UPDATE tb_user SET password = #{password} WHERE username = #{username}")
-    void updatePassword(Seat user);
+    @Select("SELECT * FROM tb_seat WHERE area_id = #{areaId}")
+    @Results({
+        @Result(property = "seatId", column = "seat_id"),
+        @Result(property = "seatRow", column = "seat_row"),
+        @Result(property = "seatCol", column = "seat_col"),
+        @Result(property = "areaId", column = "area_id")
+    })
+    Seat[] getSeatsByAreaId(int areaId);
 
 }

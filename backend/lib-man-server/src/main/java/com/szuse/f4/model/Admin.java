@@ -1,14 +1,11 @@
 package com.szuse.f4.model;
 
-import java.util.Date;
-
 public class Admin {
 
   private String username;
   private String tel;
   private String password;
   private Integer id;
-  private Date createTime;
 
   public Admin() {}
 
@@ -20,8 +17,6 @@ public class Admin {
 
   public String getPassword() { return password; }
   public void setPassword(String password) { this.password = password; }
-
-  public Date getCreateTime() { return createTime; }
 
   public Integer getId() { return id; }
 }
