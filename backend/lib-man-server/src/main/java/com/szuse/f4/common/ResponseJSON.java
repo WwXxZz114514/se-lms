@@ -4,17 +4,17 @@ public class ResponseJSON {
   private int code;
   private String msg;
   // In JSON
-  private Object body;
+  private Object data;
 
   public ResponseJSON(int code, String msg) {
     this.code = code;
     this.msg = msg;
   }
 
-  public ResponseJSON(int code, String msg, Object body) {
+  public ResponseJSON(int code, String msg, Object data) {
     this.code = code;
     this.msg = msg;
-    this.body = body;
+    this.data = data;
   }
 
   public int getCode() {
@@ -33,12 +33,12 @@ public class ResponseJSON {
     this.msg = msg;
   }
 
-  public void setBody(Object body) {
-    this.body = body;
+  public void setdata(Object data) {
+    this.data = data;
   }
 
-  public Object getBody() {
-    return body;
+  public Object getdata() {
+    return data;
   }
 
 }

@@ -4,9 +4,9 @@ import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +20,7 @@ import com.szuse.f4.common.exception.*;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+@CrossOrigin
 @RestController
 public class OrderController {
 
@@ -34,38 +35,40 @@ public class OrderController {
   @Autowired
   private AreaMapper areaMapper;
 
-  @GetMapping("/order/{orderId}")
-  public ResponseJSON getOrder(HttpServletRequest request,
-      @PathVariable("orderId") int orderId) {
+  @GetMapping("/orders")
+  public ResponseJSON getOrders(HttpServletRequest request,
+      @RequestParam("order_id") int orderId) {
 
     User user = (User) request.getSession().getAttribute("user");
     Admin admin = (Admin) request.getSession().getAttribute("admin");
-    Order order = orderMapper.getOrderByOrderId(orderId);
-    if (admin == null) {
-      if (user == null) {
-        throw new UnauthorizedException("Please login first");
-      } else if (order.getUserId() != user.getId()) {
-        throw new UnauthorizedException("You are not authorized to get this order");
-      }
-    }
-    return new ResponseJSON(0, "success", makeReturnObject(order));
-  }
-
-  @GetMapping("/order")
-  public ResponseJSON getOrders(HttpServletRequest request) {
-
-    User user = (User) request.getSession().getAttribute("user");
-    Admin admin = (Admin) request.getSession().getAttribute("admin");
+    JSONObject returnObject = new JSONObject();
     if (admin == null) {
       if (user == null) {
         throw new UnauthorizedException("Please login first");
       }
-      return new ResponseJSON(0, "success", orderMapper.getOrdersByUserId(user.getId()));
+      if (orderId == 0) {
+        Order[] myOrders = orderMapper.getOrdersByUserId(user.getId());
+        returnObject.put("order_info", makeReturnObjects(myOrders));
+      } else {
+        Order[] orders = new Order[] { orderMapper.getOrderByOrderId(orderId) };
+        if (orders[0].getUserId() != user.getId()) {
+          throw new ForbiddenException("You are not authorized to view this order");
+        }
+        returnObject.put("order_info", makeReturnObjects(orders));
+        return new ResponseJSON(200, "success", returnObject);
+      }
     }
-    return new ResponseJSON(0, "success", makeReturnObjects(orderMapper.getOrders()));
+    if (orderId == 0) {
+      // return all orders
+      returnObject.put("order_info", makeReturnObjects(orderMapper.getOrders()));
+    } else {
+      Order[] orders = new Order[] { orderMapper.getOrderByOrderId(orderId) };
+      returnObject.put("order_info", makeReturnObjects(orders));
+    }
+    return new ResponseJSON(200, "success", returnObject);
   }
 
-  @PostMapping("/order")
+  @PostMapping("/orders")
   public ResponseJSON insertOrder(HttpServletRequest request,
       @RequestBody Order order) {
 
@@ -75,14 +78,14 @@ public class OrderController {
       if (user == null) {
         throw new UnauthorizedException("Please login first");
       } else if (order.getUserId() != user.getId()) {
-        throw new UnauthorizedException("You are not authorized to update this order");
+        throw new ForbiddenException("You are not authorized to update this order");
       }
     }
     orderMapper.insertOrder(order);
-    return new ResponseJSON(0, "success");
+    return new ResponseJSON(200, "success");
   }
 
-  @PutMapping("/order")
+  @PutMapping("/orders")
   public ResponseJSON updateOrder(HttpServletRequest request,
       @RequestBody Order order) {
 
@@ -92,16 +95,16 @@ public class OrderController {
       if (user == null) {
         throw new UnauthorizedException("Please login first");
       } else if (order.getUserId() != user.getId()) {
-        throw new UnauthorizedException("You are not authorized to update this order");
+        throw new ForbiddenException("You are not authorized to update this order");
       }
     }
     orderMapper.updateOrder(order);
-    return new ResponseJSON(0, "success");
+    return new ResponseJSON(200, "success");
   }
 
-  @DeleteMapping("/order")
+  @DeleteMapping("/orders")
   public ResponseJSON deleteOrder(HttpServletRequest request,
-      @RequestParam("orderId") int orderId) {
+      @RequestParam("order_id") int orderId) {
 
     Order order = orderMapper.getOrderByOrderId(orderId);
     User user = (User) request.getSession().getAttribute("user");
@@ -110,24 +113,24 @@ public class OrderController {
       if (user == null) {
         throw new UnauthorizedException("Please login first");
       } else if (order.getUserId() != user.getId()) {
-        throw new UnauthorizedException("You are not authorized to delete this order");
+        throw new ForbiddenException("You are not authorized to delete this order");
       }
     }
     orderMapper.deleteOrderByOrderId(orderId);
-    return new ResponseJSON(0, "success");
+    return new ResponseJSON(200, "success");
   }
 
   private JSONObject makeReturnObject(Order order) {
     Seat seat = seatMapper.getSeatBySeatId(order.getSeatId());
     Area area = areaMapper.getAreaByAreaId(seat.getAreaId());
     JSONObject seatStatus = new JSONObject();
-    seatStatus.put("seatId", seat.getSeatId());
-    seatStatus.put("row", seat.getSeatRow());
-    seatStatus.put("col", seat.getSeatCol());
+    seatStatus.put("seat_id", seat.getSeatId());
+    seatStatus.put("seat_row", seat.getSeatRow());
+    seatStatus.put("seat_col", seat.getSeatCol());
     seatStatus.put("type", 1);
     JSONObject returnObject = new JSONObject();
-    returnObject.put("orderId", order.getOrderId());
-    returnObject.put("areaName", area.getAreaName());
+    returnObject.put("order_id", order.getOrderId());
+    returnObject.put("area_name", area.getAreaName());
     returnObject.put("time", sdf.format(order.getAppointmentTime()));
     returnObject.put("seat", seatStatus);
     return returnObject;

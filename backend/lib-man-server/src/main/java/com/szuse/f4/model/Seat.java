@@ -1,10 +1,16 @@
 package com.szuse.f4.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Seat {
 
+  @JsonProperty("seat_id")
   private int seatId;
+  @JsonProperty("seat_row")
   private int seatRow;
+  @JsonProperty("seat_col")
   private int seatCol;
+  @JsonProperty("area_id")
   private int areaId;
 
   public Seat() {

@@ -1,8 +1,12 @@
 package com.szuse.f4.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Area {
 
+  @JsonProperty("area_id")
   private int areaId;
+  @JsonProperty("area_name")
   private String areaName;
 
   public Area() {

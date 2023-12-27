@@ -2,15 +2,21 @@ package com.szuse.f4.model;
 
 import java.sql.Timestamp;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Order {
 
+  @JsonProperty("order_id")
   private int orderId;
+  @JsonProperty("user_id")
   private int userId;
+  @JsonProperty("seat_id")
   private int seatId;
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
+  @JsonProperty("order_time")
   private Timestamp orderTime;
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
+  @JsonProperty("appointment_time")
   private Timestamp appointmentTime;
 
   public Order() {

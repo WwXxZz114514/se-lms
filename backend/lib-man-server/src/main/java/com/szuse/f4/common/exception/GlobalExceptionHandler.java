@@ -27,4 +27,16 @@ public class GlobalExceptionHandler {
     return new ResponseJSON(3, e.getMessage());
   }
 
+  @ExceptionHandler(Created.class)
+  @ResponseStatus(HttpStatus.CREATED)
+  public ResponseJSON handleCreated(Created e) {
+    return new ResponseJSON(4, e.getMessage());
+  }
+
+  @ExceptionHandler(ForbiddenException.class)
+  @ResponseStatus(HttpStatus.FORBIDDEN)
+  public ResponseJSON handleForbiddenException(ForbiddenException e) {
+    return new ResponseJSON(5, e.getMessage());
+  }
+
 }

@@ -1,27 +1,27 @@
 package com.szuse.f4.controller;
 
 import java.text.SimpleDateFormat;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Date;
-import com.szuse.f4.model.Order;
-import com.szuse.f4.model.Seat;
-import com.szuse.f4.model.User;
-import com.szuse.f4.model.Area;
-import com.szuse.f4.mapper.SeatMapper;
-import com.szuse.f4.mapper.OrderMapper;
-import com.szuse.f4.mapper.AreaMapper;
+import com.szuse.f4.model.*;
+import com.szuse.f4.mapper.*;
 import com.szuse.f4.common.exception.*;
 import com.szuse.f4.common.ResponseJSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.servlet.http.HttpServletRequest;
 
+@CrossOrigin
 @RestController
 public class SeatController {
 
@@ -59,27 +59,35 @@ public class SeatController {
     }
   };
 
-  @GetMapping("/seat")
+  @GetMapping("/seats")
   public ResponseJSON getSeatList(HttpServletRequest request,
-      @RequestParam("areaId") int areaId,
-      @RequestParam("appointmentTime") String appointmentTimeString) {
+      @RequestBody Query query) {
 
-    Area area = areaMapper.getAreaByAreaId(areaId);
-    Seat[] seats = seatMapper.getSeatsByAreaId(areaId);
-
-    JSONArray seatList = new JSONArray();
-    for (Seat seat : seats) {
-      seatList.add(makeSeatListObject(seat, appointmentTimeString));
+    int seatId = query.getSeatId();
+    String appointmentTimeString = query.getAppointmentTimeString();
+    int areaId = query.getAreaId();
+    if (seatId != 0 && areaId != 0) {
+      throw new BadRequestException("Invalid parameters");
     }
 
-    JSONObject areaStatus = new JSONObject();
-    areaStatus.put("areaId", area.getAreaId());
-    areaStatus.put("areaName", area.getAreaName());
-    areaStatus.put("time", appointmentTimeString);
-    areaStatus.put("seatList", seatList);
-    areaStatus.put("seatTypeList", seatTypeList);
+    JSONArray seatList = new JSONArray();
+    if (areaId != 0) {
+      Area area = areaMapper.getAreaByAreaId(areaId);
+      Seat[] seats = seatMapper.getSeatsByAreaId(areaId);
+      for (Seat seat : seats) {
+        seatList.add(appointmentTimeString != null ? makeSeatListObject(seat, appointmentTimeString)
+          : seat);
+      }
+    } else {
+      Seat seat = seatMapper.getSeatBySeatId(seatId);
+      seatList.add(appointmentTimeString != null ? makeSeatListObject(seat, appointmentTimeString)
+        : seat);
+    }
 
-    return new ResponseJSON(0, "success", areaStatus);
+    JSONObject returnObject = new JSONObject();
+    returnObject.put("seats_info", seatList);
+
+    return new ResponseJSON(200, "success", returnObject);
   }
 
   private JSONObject makeSeatListObject(Seat seat, String appointmentTimeString) {
@@ -94,11 +102,52 @@ public class SeatController {
     Order order = orderMapper.getOrderBySeatAndAppointmentTime(seat.getSeatId(), appointmentTimestamp);
 
     JSONObject seatListObject = new JSONObject();
-    seatListObject.put("seatId", seat.getSeatId());
-    seatListObject.put("row", seat.getSeatRow());
-    seatListObject.put("col", seat.getSeatCol());
+    seatListObject.put("seat_id", seat.getSeatId());
+    seatListObject.put("seat_row", seat.getSeatRow());
+    seatListObject.put("seat_col", seat.getSeatCol());
+    seatListObject.put("area_id", seat.getAreaId());
     seatListObject.put("type", order == null ? 0 : 1);
     return seatListObject;
+  }
+
+}
+
+class Query {
+  private int seatId;
+  private String appointmentTimeString;
+  private int areaId;
+
+  public Query() {
+  }
+
+  public Query(int seatId, String appointmentTimeString, int areaId) {
+    this.seatId = seatId;
+    this.appointmentTimeString = appointmentTimeString;
+    this.areaId = areaId;
+  }
+
+  public int getSeatId() {
+    return seatId;
+  }
+
+  public void setSeatId(int seatId) {
+    this.seatId = seatId;
+  }
+
+  public String getAppointmentTimeString() {
+    return appointmentTimeString;
+  }
+
+  public void setAppointmentTimeString(String appointmentTimeString) {
+    this.appointmentTimeString = appointmentTimeString;
+  }
+
+  public int getAreaId() {
+    return areaId;
+  }
+
+  public void setAreaId(int areaId) {
+    this.areaId = areaId;
   }
 
 }
