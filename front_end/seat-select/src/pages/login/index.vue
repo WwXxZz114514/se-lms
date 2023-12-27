@@ -5,7 +5,7 @@
       <div class="inputData">
         <div>
           卡号：
-          <input v-model="cardNumber" class="input" type="text" placeholder="请输入卡号" />
+          <input v-model="username" class="input" type="text" placeholder="请输入卡号" />
         </div>
         <div>
           密码：
@@ -14,7 +14,7 @@
       </div>
       <div class="login-free">
         <input v-model="isLoginFree" type="checkbox" id="loginFree" name="loginFree" value="loginFree">
-        <label for="loginFree" style="margin-left: 4px;">一周内免登录</label><br>
+        <label for="loginFree" style="margin-left: 4px;">记住密码</label><br>
       </div>
       <div>
         <button class="btn" @click="login">登录</button>
@@ -26,22 +26,32 @@
 export default {
   data () {
     return {
-      cardNumber: '',
+      username: '',
       password: '',
       isLoginFree: false
     }
   },
+  mounted () {
+    this.username = localStorage.getItem('username') || ''
+    this.password = localStorage.getItem('password') || ''
+  },
   methods: {
     login () {
-      this.$post('/api/login', {
-        cardNumber: this.cardNumber,
-        password: this.password,
-        isLoginFree: this.isLoginFree
+      this.$post('/user/login', {
+        username: this.username,
+        password: this.password
       }).then(res => {
         if (res.code === 200) {
-          this.$router.push('/')
+          if (this.isLoginFree) {
+            localStorage.setItem('username', this.username)
+            localStorage.setItem('password', this.password)
+          } else {
+            localStorage.removeItem('username')
+            localStorage.removeItem('password')
+          }
+          this.$router.push('/hall-seat')
         } else {
-          // this.$message.error(res.msg)
+          this.$message.error(res.msg)
         }
       })
     }

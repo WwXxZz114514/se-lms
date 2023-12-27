@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view/>
+    <div style="display: flex; flex-direction: column;">
+      <router-view/>
+    </div>
   </div>
 </template>
 <style lang="stylus">
