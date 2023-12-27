@@ -20,9 +20,9 @@ public class UserController {
 
   @PostMapping("/user/login")
   public ResponseJSON login(HttpServletRequest request,
-                      @RequestParam("username") String username,
-                      @RequestParam("password") String password) {
-    
+      @RequestParam("username") String username,
+      @RequestParam("password") String password) {
+
     if (username == null || password == null) {
       throw new BadRequestException("Invalid parameters");
     }
@@ -39,8 +39,8 @@ public class UserController {
 
   @PostMapping("/user/register")
   public ResponseJSON register(@RequestParam("username") String username,
-                         @RequestParam("tel") String tel,
-                         @RequestParam("password") String password) {
+      @RequestParam("tel") String tel,
+      @RequestParam("password") String password) {
     User u = userMapper.getUserByUsername(username);
     if (u != null) {
       throw new BadRequestException("User already exists");
@@ -55,9 +55,9 @@ public class UserController {
 
   @PostMapping("/user/change-password")
   public ResponseJSON changePassword(HttpServletRequest request,
-                               @RequestParam("username") String username,
-                               @RequestParam("oldPassword") String oldPassword,
-                               @RequestParam("newPassword") String newPassword) {
+      @RequestParam("username") String username,
+      @RequestParam("oldPassword") String oldPassword,
+      @RequestParam("newPassword") String newPassword) {
     User u = userMapper.getUserByUsername(username);
     if (request.getSession().getAttribute("user") == null) {
       throw new UnauthorizedException("Not logged in");

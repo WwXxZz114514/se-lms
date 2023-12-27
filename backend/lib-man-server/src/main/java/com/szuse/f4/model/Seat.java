@@ -7,8 +7,9 @@ public class Seat {
   private int seatCol;
   private int areaId;
 
-  public Seat() {}
-  
+  public Seat() {
+  }
+
   public Seat(int seatId, int seatRow, int seatCol, int areaId) {
     this.seatId = seatId;
     this.seatRow = seatRow;
@@ -23,13 +24,36 @@ public class Seat {
     this.areaId = seat.areaId;
   }
 
-  public int getSeatId() { return seatId; }
-  public void setSeatId(int seatId) { this.seatId = seatId; }
-  public int getSeatRow() { return seatRow; }
-  public void setSeatRow(int seatRow) { this.seatRow = seatRow; }
-  public int getSeatCol() { return seatCol; }
-  public void setSeatCol(int seatCol) { this.seatCol = seatCol; }
-  public int getAreaId() { return areaId; }
-  public void setAreaId(int areaId) { this.areaId = areaId; }
+  public int getSeatId() {
+    return seatId;
+  }
+
+  public void setSeatId(int seatId) {
+    this.seatId = seatId;
+  }
+
+  public int getSeatRow() {
+    return seatRow;
+  }
+
+  public void setSeatRow(int seatRow) {
+    this.seatRow = seatRow;
+  }
+
+  public int getSeatCol() {
+    return seatCol;
+  }
+
+  public void setSeatCol(int seatCol) {
+    this.seatCol = seatCol;
+  }
+
+  public int getAreaId() {
+    return areaId;
+  }
+
+  public void setAreaId(int areaId) {
+    this.areaId = areaId;
+  }
 
 }

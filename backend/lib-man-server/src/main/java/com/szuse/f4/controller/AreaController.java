@@ -17,56 +17,53 @@ import com.szuse.f4.common.exception.*;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-
 @RestController
 public class AreaController {
-    
-    @Autowired
-    private AreaMapper areaMapper;
 
-    @GetMapping("/area/{areaId}")
-    public ResponseJSON getArea(@PathVariable("areaId") int areaId) {
-        
-        return new ResponseJSON(0, "success", areaMapper.getAreaByAreaId(areaId));
-    }
+  @Autowired
+  private AreaMapper areaMapper;
 
-    @GetMapping("/area")
-    public ResponseJSON getAreas() {
-        
-        return new ResponseJSON(0, "success", areaMapper.getAreas());
-    }
+  @GetMapping("/area/{areaId}")
+  public ResponseJSON getArea(@PathVariable("areaId") int areaId) {
+    return new ResponseJSON(0, "success", areaMapper.getAreaByAreaId(areaId));
+  }
 
-    @PostMapping("/area")
-    public ResponseJSON insertArea(HttpServletRequest request,
-        @RequestBody Area area) {
-        
-        if (request.getSession().getAttribute("admin") == null) {
-            throw new UnauthorizedException("Authorized admin only");
-        }
-        areaMapper.insertArea(area);
-        return new ResponseJSON(0, "success");
-    }
+  @GetMapping("/area")
+  public ResponseJSON getAreas() {
+    return new ResponseJSON(0, "success", areaMapper.getAreas());
+  }
 
-    @PutMapping("/area")
-    public ResponseJSON updateArea(HttpServletRequest request,
-        @RequestBody Area area) {
-        
-        if (request.getSession().getAttribute("admin") == null) {
-            throw new UnauthorizedException("Authorized admin only");
-        }
-        areaMapper.updateArea(area);
-        return new ResponseJSON(0, "success");
-    }
+  @PostMapping("/area")
+  public ResponseJSON insertArea(HttpServletRequest request,
+      @RequestBody Area area) {
 
-    @DeleteMapping("/area")
-    public ResponseJSON deleteArea(HttpServletRequest request,
-        @RequestParam("areaId") int areaId) {
-        
-        if (request.getSession().getAttribute("admin") == null) {
-            throw new UnauthorizedException("Authorized admin only");
-        }
-        areaMapper.deleteAreaByAreaId(areaId);
-        return new ResponseJSON(0, "success");
+    if (request.getSession().getAttribute("admin") == null) {
+      throw new UnauthorizedException("Authorized admin only");
     }
+    areaMapper.insertArea(area);
+    return new ResponseJSON(0, "success");
+  }
+
+  @PutMapping("/area")
+  public ResponseJSON updateArea(HttpServletRequest request,
+      @RequestBody Area area) {
+
+    if (request.getSession().getAttribute("admin") == null) {
+      throw new UnauthorizedException("Authorized admin only");
+    }
+    areaMapper.updateArea(area);
+    return new ResponseJSON(0, "success");
+  }
+
+  @DeleteMapping("/area")
+  public ResponseJSON deleteArea(HttpServletRequest request,
+      @RequestParam("areaId") int areaId) {
+
+    if (request.getSession().getAttribute("admin") == null) {
+      throw new UnauthorizedException("Authorized admin only");
+    }
+    areaMapper.deleteAreaByAreaId(areaId);
+    return new ResponseJSON(0, "success");
+  }
 
 }

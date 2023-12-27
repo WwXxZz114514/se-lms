@@ -20,10 +20,10 @@ public class AdminController {
 
   @PostMapping("/admin/login")
   public ResponseJSON login(HttpServletRequest request,
-                      HttpServletRequest response,
-                      @RequestParam("username") String username,
-                      @RequestParam("password") String password) {
-    
+      HttpServletRequest response,
+      @RequestParam("username") String username,
+      @RequestParam("password") String password) {
+
     if (username == null || password == null) {
       throw new BadRequestException("Invalid parameters");
     }
@@ -40,8 +40,8 @@ public class AdminController {
 
   @PostMapping("/admin/register")
   public ResponseJSON register(@RequestParam("username") String username,
-                         @RequestParam("tel") String tel,
-                         @RequestParam("password") String password) {
+      @RequestParam("tel") String tel,
+      @RequestParam("password") String password) {
     Admin u = adminMapper.getAdminByUsername(username);
     if (u != null) {
       throw new BadRequestException("Admin already exists");
@@ -56,9 +56,9 @@ public class AdminController {
 
   @PostMapping("/admin/change-password")
   public ResponseJSON changePassword(HttpServletRequest request,
-                               @RequestParam("username") String username,
-                               @RequestParam("oldPassword") String oldPassword,
-                               @RequestParam("newPassword") String newPassword) {
+      @RequestParam("username") String username,
+      @RequestParam("oldPassword") String oldPassword,
+      @RequestParam("newPassword") String newPassword) {
     Admin u = adminMapper.getAdminByUsername(username);
     if (request.getSession().getAttribute("admin") == null) {
       throw new UnauthorizedException("Not logged in");

@@ -35,6 +35,7 @@ public class SeatController {
   private AreaMapper areaMapper;
 
   private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
   private static final JSONArray seatTypeList = new JSONArray() {
     {
       add(new JSONObject() {
@@ -90,16 +91,13 @@ public class SeatController {
     }
     Timestamp appointmentTimestamp = new Timestamp(appointmentTime.getTime());
 
+    Order order = orderMapper.getOrderBySeatAndAppointmentTime(seat.getSeatId(), appointmentTimestamp);
+
     JSONObject seatListObject = new JSONObject();
     seatListObject.put("seatId", seat.getSeatId());
     seatListObject.put("row", seat.getSeatRow());
     seatListObject.put("col", seat.getSeatCol());
-    Order order = orderMapper.getOrderBySeatAndAppointmentTime(seat.getSeatId(), appointmentTimestamp);
-    if (order != null) {
-      seatListObject.put("type", 1);
-    } else {
-      seatListObject.put("type", 0);
-    }
+    seatListObject.put("type", order == null ? 0 : 1);
     return seatListObject;
   }
 

@@ -20,126 +20,125 @@ import com.szuse.f4.common.exception.*;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-
 @RestController
 public class OrderController {
-    
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-    @Autowired
-    private OrderMapper orderMapper;
+  private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-    @Autowired
-    private SeatMapper seatMapper;
+  @Autowired
+  private OrderMapper orderMapper;
 
-    @Autowired
-    private AreaMapper areaMapper;
+  @Autowired
+  private SeatMapper seatMapper;
 
-    @GetMapping("/order/{orderId}")
-    public ResponseJSON getOrder(HttpServletRequest request,
-        @PathVariable("orderId") int orderId) {
-        
-        User user = (User)request.getSession().getAttribute("user");
-        Admin admin = (Admin)request.getSession().getAttribute("admin");
-        Order order = orderMapper.getOrderByOrderId(orderId);
-        if (admin == null) {
-            if (user == null) {
-                throw new UnauthorizedException("Please login first");
-            } else if (order.getUserId() != user.getId()) {
-                throw new UnauthorizedException("You are not authorized to get this order");
-            }
-        }
-        return new ResponseJSON(0, "success", makeReturnObject(order));
+  @Autowired
+  private AreaMapper areaMapper;
+
+  @GetMapping("/order/{orderId}")
+  public ResponseJSON getOrder(HttpServletRequest request,
+      @PathVariable("orderId") int orderId) {
+
+    User user = (User) request.getSession().getAttribute("user");
+    Admin admin = (Admin) request.getSession().getAttribute("admin");
+    Order order = orderMapper.getOrderByOrderId(orderId);
+    if (admin == null) {
+      if (user == null) {
+        throw new UnauthorizedException("Please login first");
+      } else if (order.getUserId() != user.getId()) {
+        throw new UnauthorizedException("You are not authorized to get this order");
+      }
     }
+    return new ResponseJSON(0, "success", makeReturnObject(order));
+  }
 
-    @GetMapping("/order")
-    public ResponseJSON getOrders(HttpServletRequest request) {
-        
-        User user = (User)request.getSession().getAttribute("user");
-        Admin admin = (Admin)request.getSession().getAttribute("admin");
-        if (admin == null) {
-            if (user == null) {
-                throw new UnauthorizedException("Please login first");
-            }
-            return new ResponseJSON(0, "success", orderMapper.getOrdersByUserId(user.getId()));
-        }
-        return new ResponseJSON(0, "success", makeReturnObjects(orderMapper.getOrders()));
-    }
+  @GetMapping("/order")
+  public ResponseJSON getOrders(HttpServletRequest request) {
 
-    @PostMapping("/order")
-    public ResponseJSON insertOrder(HttpServletRequest request,
-        @RequestBody Order order) {
-        
-        User user = (User)request.getSession().getAttribute("user");
-        Admin admin = (Admin)request.getSession().getAttribute("admin");
-        if (admin == null) {
-            if (user == null) {
-                throw new UnauthorizedException("Please login first");
-            } else if (order.getUserId() != user.getId()) {
-                throw new UnauthorizedException("You are not authorized to update this order");
-            }
-        }
-        orderMapper.insertOrder(order);
-        return new ResponseJSON(0, "success");
+    User user = (User) request.getSession().getAttribute("user");
+    Admin admin = (Admin) request.getSession().getAttribute("admin");
+    if (admin == null) {
+      if (user == null) {
+        throw new UnauthorizedException("Please login first");
+      }
+      return new ResponseJSON(0, "success", orderMapper.getOrdersByUserId(user.getId()));
     }
+    return new ResponseJSON(0, "success", makeReturnObjects(orderMapper.getOrders()));
+  }
 
-    @PutMapping("/order")
-    public ResponseJSON updateOrder(HttpServletRequest request,
-        @RequestBody Order order) {
-        
-        User user = (User)request.getSession().getAttribute("user");
-        Admin admin = (Admin)request.getSession().getAttribute("admin");
-        if (admin == null) {
-            if (user == null) {
-                throw new UnauthorizedException("Please login first");
-            } else if (order.getUserId() != user.getId()) {
-                throw new UnauthorizedException("You are not authorized to update this order");
-            }
-        }
-        orderMapper.updateOrder(order);
-        return new ResponseJSON(0, "success");
-    }
+  @PostMapping("/order")
+  public ResponseJSON insertOrder(HttpServletRequest request,
+      @RequestBody Order order) {
 
-    @DeleteMapping("/order")
-    public ResponseJSON deleteOrder(HttpServletRequest request,
-        @RequestParam("orderId") int orderId) {
-        
-        Order order = orderMapper.getOrderByOrderId(orderId);
-        User user = (User)request.getSession().getAttribute("user");
-        Admin admin = (Admin)request.getSession().getAttribute("admin");
-        if (admin == null) {
-            if (user == null) {
-                throw new UnauthorizedException("Please login first");
-            } else if (order.getUserId() != user.getId()) {
-                throw new UnauthorizedException("You are not authorized to delete this order");
-            }
-        }
-        orderMapper.deleteOrderByOrderId(orderId);
-        return new ResponseJSON(0, "success");
+    User user = (User) request.getSession().getAttribute("user");
+    Admin admin = (Admin) request.getSession().getAttribute("admin");
+    if (admin == null) {
+      if (user == null) {
+        throw new UnauthorizedException("Please login first");
+      } else if (order.getUserId() != user.getId()) {
+        throw new UnauthorizedException("You are not authorized to update this order");
+      }
     }
+    orderMapper.insertOrder(order);
+    return new ResponseJSON(0, "success");
+  }
 
-    private JSONObject makeReturnObject(Order order) {
-        Seat seat = seatMapper.getSeatBySeatId(order.getSeatId());
-        Area area = areaMapper.getAreaByAreaId(seat.getAreaId());
-        JSONObject seatStatus = new JSONObject();
-        seatStatus.put("seatId", seat.getSeatId());
-        seatStatus.put("row", seat.getSeatRow());
-        seatStatus.put("col", seat.getSeatCol());
-        seatStatus.put("type", 1);
-        JSONObject returnObject = new JSONObject();
-        returnObject.put("orderId", order.getOrderId());
-        returnObject.put("areaName", area.getAreaName());
-        returnObject.put("time", sdf.format(order.getAppointmentTime()));
-        returnObject.put("seat", seatStatus);
-        return returnObject;
-    }
+  @PutMapping("/order")
+  public ResponseJSON updateOrder(HttpServletRequest request,
+      @RequestBody Order order) {
 
-    private JSONObject[] makeReturnObjects(Order[] orders) {
-        JSONObject[] returnObjects = new JSONObject[orders.length];
-        for (int i = 0; i < orders.length; i++) {
-            returnObjects[i] = makeReturnObject(orders[i]);
-        }
-        return returnObjects;
+    User user = (User) request.getSession().getAttribute("user");
+    Admin admin = (Admin) request.getSession().getAttribute("admin");
+    if (admin == null) {
+      if (user == null) {
+        throw new UnauthorizedException("Please login first");
+      } else if (order.getUserId() != user.getId()) {
+        throw new UnauthorizedException("You are not authorized to update this order");
+      }
     }
+    orderMapper.updateOrder(order);
+    return new ResponseJSON(0, "success");
+  }
+
+  @DeleteMapping("/order")
+  public ResponseJSON deleteOrder(HttpServletRequest request,
+      @RequestParam("orderId") int orderId) {
+
+    Order order = orderMapper.getOrderByOrderId(orderId);
+    User user = (User) request.getSession().getAttribute("user");
+    Admin admin = (Admin) request.getSession().getAttribute("admin");
+    if (admin == null) {
+      if (user == null) {
+        throw new UnauthorizedException("Please login first");
+      } else if (order.getUserId() != user.getId()) {
+        throw new UnauthorizedException("You are not authorized to delete this order");
+      }
+    }
+    orderMapper.deleteOrderByOrderId(orderId);
+    return new ResponseJSON(0, "success");
+  }
+
+  private JSONObject makeReturnObject(Order order) {
+    Seat seat = seatMapper.getSeatBySeatId(order.getSeatId());
+    Area area = areaMapper.getAreaByAreaId(seat.getAreaId());
+    JSONObject seatStatus = new JSONObject();
+    seatStatus.put("seatId", seat.getSeatId());
+    seatStatus.put("row", seat.getSeatRow());
+    seatStatus.put("col", seat.getSeatCol());
+    seatStatus.put("type", 1);
+    JSONObject returnObject = new JSONObject();
+    returnObject.put("orderId", order.getOrderId());
+    returnObject.put("areaName", area.getAreaName());
+    returnObject.put("time", sdf.format(order.getAppointmentTime()));
+    returnObject.put("seat", seatStatus);
+    return returnObject;
+  }
+
+  private JSONObject[] makeReturnObjects(Order[] orders) {
+    JSONObject[] returnObjects = new JSONObject[orders.length];
+    for (int i = 0; i < orders.length; i++) {
+      returnObjects[i] = makeReturnObject(orders[i]);
+    }
+    return returnObjects;
+  }
 
 }
