@@ -1,23 +1,4 @@
 <template>
-  <el-container>
-    <el-aside>
-      <div class="scroll" ref="contentScroll">
-        <el-menu default-active="/" :router="true">
-          <el-submenu index="1">
-            <template slot="title">
-              <i class="el-icon-s-data"></i>
-              <span>模版管理</span>
-            </template>
-            <el-menu-item-group title="查看">
-              <el-menu-item index="/">模版列表</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="编辑">
-              <el-menu-item index="hallSeat">新增模版</el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-        </el-menu>
-      </div>
-    </el-aside>
     <el-container>
       <el-header>
         <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -91,11 +72,9 @@
         </el-table>
       </el-main>
     </el-container>
-  </el-container>
 </template>
 
 <script>
-import BScroll from 'better-scroll'
 import { mapState, mapMutations } from 'vuex'
 export default {
   data () {
@@ -232,25 +211,6 @@ export default {
       })
     }
     this.getTempleteList()
-    this.$nextTick(() => {
-      if (!this.scroll) {
-        this.scroll = new BScroll(this.$refs.contentScroll, {
-          scrollbar: {
-            fade: true,
-            interactive: false
-          },
-          mouseWheel: {
-            speed: 20,
-            invert: false,
-            easeTime: 300
-          },
-          scroll: true,
-          click: true }
-        )
-      } else {
-        this.scroll.refresh()
-      }
-    })
   }
 }
 </script>
@@ -269,13 +229,5 @@ export default {
     padding 0;
     .name-wrapper
       display inline-block
-  .scroll
-    overflow: hidden
-    position relative
-    height 100vh
-    border-right :solid 1px #e6e6e6
-    .el-aside
-      height 100vh
-    .el-menu
-      border none
+
 </style>

@@ -419,6 +419,7 @@ export default {
         this.changeConfirmButtonLoading(false)
         return
       }
+      console.log(confirmSeatList)
       this.$post(this.interfaceURL + 'insertSeat', {
         seats: confirmSeatList,
         templeteName: this.templeteName,

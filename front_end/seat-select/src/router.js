@@ -8,7 +8,7 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/hall-seat',
       name: 'HallSeat',
       component: HallSeat
     },
@@ -16,6 +16,11 @@ export default new Router({
       path: '/login',
       name: 'Login ',
       component: () => import('@/pages/login/index.vue')
+    },
+    {
+      path: '/order',
+      name: 'Order ',
+      component: () => import('@/pages/order/index.vue')
     }
   ]
 })

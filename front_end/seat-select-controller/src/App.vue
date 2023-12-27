@@ -1,15 +1,21 @@
 <template>
   <div id="app">
-    <router-view/>
+    <el-container>
+      <Aside v-if="$route.path == '/' || $route.path == '/order'" />
+      <router-view/>
+    </el-container>
   </div>
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex'
+import router from './router'
+import Aside from './pages/components/Aside'
 export default {
   name: 'app',
   components: {
-
+    Aside
   },
+  router,
   computed: {
     ...mapState({
       fullscreen: state => state.config.fullscreen
