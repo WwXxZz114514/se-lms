@@ -1,0 +1,49 @@
+{
+    "code": 0,
+    "msg": "OK",
+    "body": {
+        "areaId": 1,
+        "areaName": "图书馆1 1层",
+        "time": "2024-01-01 09:00",
+        "seatList": [
+            {
+                "seatId": 114514,
+                "row": 1,
+                "col": 1,
+                "type": 0
+            },
+            {
+                "seatId": 1919810,
+                "row": 1,
+                "col": 2,
+                "type": 1
+            },
+            {
+                "seatId": 810893,
+                "row": 2,
+                "col": 1,
+                "type": 0
+            },
+            {
+                "seatId": 12138,
+                "row": 2,
+                "col": 2,
+                "type": 0
+            }
+        ],
+        "seatTypeList": [
+            {
+                "name": "empty",
+                "type": 0
+            },
+            {
+                "name": "occupied",
+                "type": 1
+            },
+            {
+                "name": "selected",
+                "type": 2
+            }
+        ]
+    }
+}

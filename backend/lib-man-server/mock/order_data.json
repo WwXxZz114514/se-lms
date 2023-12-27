@@ -1,0 +1,15 @@
+{
+    "code": 0,
+    "msg": "OK",
+    "body": {
+        "orderId": 114514,
+        "areaName": "图书馆1 1层",
+        "time": "2024-01-01 09:00",
+        "seat": {
+            "seatId": 1919810,
+            "row": 1,
+            "col": 2,
+            "type": 1
+        }
+    }
+}
