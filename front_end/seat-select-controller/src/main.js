@@ -1,6 +1,4 @@
 import Vue from 'vue'
-import '@unocss/reset/tailwind.css'
-import 'uno.css'
 import App from './App.vue'
 import router from './router'
 import store from './store'

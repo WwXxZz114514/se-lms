@@ -25,6 +25,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: () => import('@/pages/login/index.vue')
+    },
+    {
+      path: '/order',
+      name: 'order',
+      component: () => import('@/pages/order/index.vue')
     }
   ]
 })
