@@ -25,9 +25,7 @@
       </div>
       <div class="tool">
         <div>
-          <el-checkbox v-model="checked" @change="remenber"
-            >记住密码</el-checkbox
-          >
+          <el-checkbox v-model="checked">记住密码</el-checkbox>
         </div>
         <div>
         </div>
@@ -65,52 +63,40 @@ export default {
     }
   },
   mounted () {
-    if (localStorage.getItem('news')) {
-      this.form = JSON.parse(localStorage.getItem('news'))
-      this.checked = true
-    }
+    this.form.username = localStorage.getItem('username') || ''
+    this.form.password = localStorage.getItem('password') || ''
   },
   methods: {
-    loginRequest () {
-
-    },
-    setToken () {
-
-    },
     login (form) {
       this.$refs[form].validate((valid) => {
         if (valid) {
-          this.loginRequest(this.form)
-            .then((res) => {
-              if (res.code === 200) {
-                this.setToken(res.data.token)
-                localStorage.setItem('USERNAME', res.data.username)
-                this.$message({
-                  message: '登录成功啦',
-                  type: 'success',
-                  showClose: true
-                })
-                this.$router.replace('/')
-              } else {
-                this.$message({
-                  message: '账户名或密码错误',
-                  type: 'error',
-                  showClose: true
-                })
+          this.$post('/admin/login', {
+            username: this.username,
+            password: this.password
+          }).then((res) => {
+            if (res.code === 200) {
+              if (this.checked) {
+                localStorage.setItem('username', this.username)
+                localStorage.setItem('password', this.password)
               }
-            })
+              this.$message({
+                message: '登录成功啦',
+                type: 'success',
+                showClose: true
+              })
+              this.$router.replace('/')
+            } else {
+              this.$message({
+                message: '账户名或密码错误',
+                type: 'error',
+                showClose: true
+              })
+            }
+          })
         } else {
           return false
         }
       })
-    },
-    remenber (data) {
-      this.checked = data
-      if (this.checked) {
-        localStorage.setItem('news', JSON.stringify(this.form))
-      } else {
-        localStorage.removeItem('news')
-      }
     }
   }
 }

@@ -33,15 +33,6 @@ export default {
     }
   },
   router,
-  beforeRouteEnter (to, from, next) {
-    next(vm => {
-      vm.defaultActive = to.path
-    })
-  },
-  beforeRouteUpdate (to, from, next) {
-    this.defaultActive = to.path
-    next()
-  },
   mounted () {
     this.$nextTick(() => {
       setTimeout(() => {
