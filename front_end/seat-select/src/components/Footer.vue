@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
-    <div class="footer-item" @click="goTo('/hall-seat','seat')">
-      <div class="footer-item" v-if="active === 'seat'">
+    <div class="footer-item" @click="goTo('/hall-seat','/hall-seat')">
+      <div class="footer-item" v-if="active === '/hall-seat'">
         <img class="icon" src="../assets/images/seat-active-footer.png" alt="">
         <span style="color: #1296db;">选座</span>
       </div>
@@ -10,8 +10,8 @@
         <span>选座</span>
       </div>
     </div>
-    <div class="footer-item" @click="goTo('/order','order')">
-      <div class="footer-item"  v-if="active === 'order'" >
+    <div class="footer-item" @click="goTo('/order','/order')">
+      <div class="footer-item"  v-if="active === '/order'" >
         <img class="icon" src="../assets/images/order-active.png" alt="">
         <span style="color: #1296db;">订单</span>
       </div>
@@ -32,6 +32,11 @@ export default {
   data () {
     return {
       active: 'seat'
+    }
+  },
+  watch: {
+    $route (to, from) {
+      this.active = to.path
     }
   },
   methods: {

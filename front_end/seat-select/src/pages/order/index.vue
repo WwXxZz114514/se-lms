@@ -6,7 +6,7 @@
       </template>
     </Header>
     <div style="overflow-y: auto; height: 88vh;">
-      <select v-model="selectOrderType" style="width: 100px; height:30px; font-size: 16px; margin: 0 0 0 8px;">
+      <select v-model="selectOrderType" style="width: 110px; height:30px; font-size: 16px; margin: 8px 0 0 10px;">
         <option value="0" style="font-size: 16px;">未签到订单</option>
         <option value="1" style="font-size: 16px;">历史订单</option>
       </select>
