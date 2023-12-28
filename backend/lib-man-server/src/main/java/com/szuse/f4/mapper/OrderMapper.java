@@ -51,6 +51,9 @@ public interface OrderMapper {
   @Update("UPDATE tb_order SET user_id = #{userId}, seat_id = #{seatId}, appointment_time = #{appointmentTime} WHERE order_id = #{orderId}")
   void updateOrder(Order order);
 
+  @Update("UPDATE tb_order SET order_status = #{orderStatus} WHERE order_id = #{orderId}")
+  void updateOrderStatus(int orderId, int orderStatus);
+
   @Select("SELECT * FROM tb_order WHERE appointment_time = #{appointmentTime}")
   @Results({
       @Result(property = "orderId", column = "order_id"),

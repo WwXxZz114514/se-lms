@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.alibaba.fastjson2.JSONObject;
@@ -118,20 +118,22 @@ public class OrderController {
     return new ResponseJSON(200, "success");
   }
 
-  @PutMapping("/orders")
+  @PatchMapping("/orders")
   public ResponseJSON updateOrder(HttpServletRequest request,
       @RequestBody Order order) {
-
+    
+    int orderId = order.getOrderId();
+    int status = order.getOrderStatus();
     User user = (User) request.getSession().getAttribute("user");
     Admin admin = (Admin) request.getSession().getAttribute("admin");
     if (admin == null) {
       if (user == null) {
         throw new UnauthorizedException("Please login first");
-      } else if (order.getUserId() != user.getId()) {
+      } else if (orderId != user.getId()) {
         throw new ForbiddenException("You are not authorized to update this order");
       }
     }
-    orderMapper.updateOrder(order);
+    orderMapper.updateOrderStatus(orderId, status);
     return new ResponseJSON(200, "success");
   }
 

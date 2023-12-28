@@ -73,7 +73,7 @@ public class SeatController {
 
     Order order = orderMapper.getOrderBySeatAndAppointmentTime(seat.getSeatId(), appointmentTimestamp);
     boolean isAvailable = false;
-    if (order.getOrderStatus() != 0) {
+    if (order == null || order.getOrderStatus() != 0) {
       isAvailable = true;
     }
 

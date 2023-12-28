@@ -19,6 +19,8 @@ CREATE TABLE tb_seat (
 CREATE TABLE tb_area (
     area_id INT PRIMARY KEY AUTO_INCREMENT,
     area_name VARCHAR(32) NOT NULL
+    area_rows INT NOT NULL DEFAULT 2,
+    area_cols INT NOT NULL DEFAULT 2
 );
 CREATE TABLE tb_order (
     order_id INT PRIMARY KEY AUTO_INCREMENT,

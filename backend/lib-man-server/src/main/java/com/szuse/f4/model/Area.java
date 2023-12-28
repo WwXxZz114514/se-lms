@@ -8,6 +8,10 @@ public class Area {
   private int areaId;
   @JsonProperty("area_name")
   private String areaName;
+  @JsonProperty("row_num")
+  private int areaRows;
+  @JsonProperty("col_num")
+  private int areaCols;
 
   public Area() {
   }
@@ -40,6 +44,22 @@ public class Area {
 
   public void setAreaName(String areaName) {
     this.areaName = areaName;
+  }
+
+  public int getAreaRows() {
+    return areaRows;
+  }
+
+  public void setAreaRows(int areaRows) {
+    this.areaRows = areaRows;
+  }
+
+  public int getAreaCols() {
+    return areaCols;
+  }
+
+  public void setAreaCols(int areaCols) {
+    this.areaCols = areaCols;
   }
 
 }
