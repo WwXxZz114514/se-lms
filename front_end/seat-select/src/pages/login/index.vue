@@ -4,8 +4,8 @@
       <div class="tittle">欢迎进入图书馆订座系统</div>
       <div class="inputData">
         <div>
-          卡号：
-          <input v-model="username" class="input" type="text" placeholder="请输入卡号" />
+          账号：
+          <input v-model="username" class="input" type="text" placeholder="请输入账号" />
         </div>
         <div>
           密码：
