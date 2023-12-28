@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -49,20 +49,23 @@ public class AreaController {
     return new ResponseJSON(200, "success");
   }
 
-  @PutMapping("/areas")
+  @PatchMapping("/areas")
   public ResponseJSON updateArea(HttpServletRequest request,
       @RequestBody Area area) {
 
     if (request.getSession().getAttribute("admin") == null) {
       throw new UnauthorizedException("Authorized admin only");
     }
+    String areaName = area.getAreaName();
+    Area oldArea = areaMapper.getAreaByAreaId(area.getAreaId());
+    oldArea.setAreaName(areaName);
     areaMapper.updateArea(area);
     return new ResponseJSON(200, "success");
   }
 
   @DeleteMapping("/areas")
   public ResponseJSON deleteArea(HttpServletRequest request,
-      @RequestParam("areaId") int areaId) {
+      @RequestParam("area_id") int areaId) {
 
     if (request.getSession().getAttribute("admin") == null) {
       throw new UnauthorizedException("Authorized admin only");

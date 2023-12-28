@@ -30,7 +30,7 @@ public interface AreaMapper {
   @Update("INSERT INTO tb_area (area_name, area_rows, area_cols) VALUES (#{areaName}, #{areaRows}, #{areaCols})")
   void insertArea(Area area);
 
-  @Update("UPDATE tb_area SET area_name = #{areaName}, row_num = #{areaRows}, col_num = #{areaCols} WHERE area_id = #{areaId}")
+  @Update("UPDATE tb_area SET area_name = #{areaName}, area_rows = #{areaRows}, area_cols = #{areaCols} WHERE area_id = #{areaId}")
   void updateArea(Area area);
 
   @Delete("DELETE FROM tb_area WHERE area_id = #{areaId}")
