@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +20,6 @@ import com.szuse.f4.common.exception.*;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-@CrossOrigin
 @RestController
 public class OrderController {
 
@@ -70,7 +68,12 @@ public class OrderController {
         Order[] myOrders = orderMapper.getValidOrdersByUserId(user.getId());
         returnObject.put("order_info", makeReturnObjects(myOrders));
       } else {
-        Order[] orders = new Order[] { orderMapper.getOrderByOrderId(orderId) };
+        Order[] orders;
+        try {
+          orders = new Order[] { orderMapper.getOrderByOrderId(orderId) };
+        } catch (Exception e) {
+          throw new BadRequestException("Invalid order id");
+        }
         if (orders[0].getUserId() != user.getId()) {
           throw new ForbiddenException("You are not authorized to view this order");
         }
@@ -83,7 +86,12 @@ public class OrderController {
       // return all valid orders
       returnObject.put("order_info", makeReturnObjects(orderMapper.getValidOrders()));
     } else {
-      Order[] orders = new Order[] { orderMapper.getOrderByOrderId(orderId) };
+      Order[] orders;
+      try {
+        orders = new Order[] { orderMapper.getOrderByOrderId(orderId) };
+      } catch (Exception e) {
+        throw new BadRequestException("Invalid order id");
+      }
       returnObject.put("order_info", makeReturnObjects(orders));
     }
     return new ResponseJSON(200, "success", returnObject);
@@ -113,7 +121,11 @@ public class OrderController {
       orderMapper.insertOrder(order);
       orderMapper.updateExpiredOrders();
     } catch (Exception e) {
-      throw new ForbiddenException("Seat is not available");
+      Order existOrder = orderMapper.getOrderBySeatAndAppointmentTime(order.getSeatId(), appointmentTimestamp);
+      if (existOrder != null) {
+        throw new ForbiddenException("Seat not available");
+      }
+      throw new ForbiddenException("You have already booked a seat");
     }
     return new ResponseJSON(200, "success");
   }
@@ -133,7 +145,11 @@ public class OrderController {
         throw new ForbiddenException("You are not authorized to update this order");
       }
     }
-    orderMapper.updateOrderStatus(orderId, status);
+    try {
+      orderMapper.updateOrderStatus(orderId, status);
+    } catch (Exception e) {
+      throw new BadRequestException("Invalid order id");
+    }
     return new ResponseJSON(200, "success");
   }
 
@@ -151,7 +167,11 @@ public class OrderController {
         throw new ForbiddenException("You are not authorized to delete this order");
       }
     }
-    orderMapper.deleteOrderByOrderId(orderId);
+    try {
+      orderMapper.deleteOrderByOrderId(orderId);
+    } catch (Exception e) {
+      throw new BadRequestException("Invalid order id");
+    }
     return new ResponseJSON(200, "success");
   }
 

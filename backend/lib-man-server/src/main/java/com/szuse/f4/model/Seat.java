@@ -23,6 +23,12 @@ public class Seat {
     this.areaId = areaId;
   }
 
+  public Seat(int seatRow, int seatCol, int areaId) {
+    this.seatRow = seatRow;
+    this.seatCol = seatCol;
+    this.areaId = areaId;
+  }
+
   public Seat(Seat seat) {
     this.seatId = seat.seatId;
     this.seatRow = seat.seatRow;

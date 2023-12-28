@@ -7,7 +7,6 @@ import com.szuse.f4.common.exception.UnauthorizedException;
 import com.szuse.f4.common.exception.Created;
 import com.szuse.f4.common.ResponseJSON;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.servlet.http.HttpServletRequest;
 
-@CrossOrigin
 @RestController
 public class AdminController {
 
@@ -47,15 +45,15 @@ public class AdminController {
     String username = admin.getUsername();
     String tel = admin.getTel();
     String password = admin.getPassword();
-    Admin u = adminMapper.getAdminByUsername(username);
-    if (u != null) {
-      throw new BadRequestException("Admin already exists");
-    }
     Admin newAdmin = new Admin();
     newAdmin.setUsername(username);
     newAdmin.setTel(tel);
     newAdmin.setPassword(password);
-    adminMapper.insertAdmin(newAdmin);
+    try {
+      adminMapper.insertAdmin(newAdmin);
+    } catch (Exception e) {
+      throw new BadRequestException("Admin already exists");
+    }
     throw new Created("success");
   }
 

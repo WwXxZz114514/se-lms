@@ -7,7 +7,6 @@ import com.szuse.f4.common.exception.UnauthorizedException;
 import com.szuse.f4.common.exception.Created;
 import com.szuse.f4.common.ResponseJSON;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.servlet.http.HttpServletRequest;
 
-@CrossOrigin
 @RestController
 public class UserController {
 
@@ -47,15 +45,15 @@ public class UserController {
     String username = user.getUsername();
     String tel = user.getTel();
     String password = user.getPassword();
-    User u = userMapper.getUserByUsername(username);
-    if (u != null) {
-      throw new BadRequestException("User already exists");
-    }
     User newUser = new User();
     newUser.setUsername(username);
     newUser.setTel(tel);
     newUser.setPassword(password);
-    userMapper.insertUser(newUser);
+    try {
+      userMapper.insertUser(newUser);
+    } catch (Exception e) {
+      throw new BadRequestException("User already exists");
+    }
     throw new Created("success");
   }
 

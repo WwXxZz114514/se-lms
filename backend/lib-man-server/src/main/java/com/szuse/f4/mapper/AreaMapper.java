@@ -18,6 +18,15 @@ public interface AreaMapper {
   })
   Area getAreaByAreaId(int areaId);
 
+  @Select("SELECT * FROM tb_area WHERE area_name = #{areaName}")
+  @Results({
+      @Result(property = "areaId", column = "area_id"),
+      @Result(property = "areaName", column = "area_name"),
+      @Result(property = "areaRows", column = "area_rows"),
+      @Result(property = "areaCols", column = "area_cols")
+  })
+  Area getAreaByAreaName(String areaName);
+
   @Select("SELECT * FROM tb_area")
   @Results({
       @Result(property = "areaId", column = "area_id"),
