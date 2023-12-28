@@ -27,7 +27,7 @@ public interface AreaMapper {
   })
   Area[] getAreas();
 
-  @Update("INSERT INTO tb_area (area_name, area_rows, area_cols) VALUES (#{areaName}, #{areaRows}, #{areaCols}})")
+  @Update("INSERT INTO tb_area (area_name, area_rows, area_cols) VALUES (#{areaName}, #{areaRows}, #{areaCols})")
   void insertArea(Area area);
 
   @Update("UPDATE tb_area SET area_name = #{areaName}, row_num = #{areaRows}, col_num = #{areaCols} WHERE area_id = #{areaId}")
