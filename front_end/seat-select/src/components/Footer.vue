@@ -1,12 +1,24 @@
 <template>
   <div class="footer">
-    <div class="footer-item" @click="goTo('/hall-seat')">
-      <img class="icon" src="../assets/images/seat.png" alt="">
-      <span>选座</span>
+    <div class="footer-item" @click="goTo('/hall-seat','seat')">
+      <div class="footer-item" v-if="active === 'seat'">
+        <img class="icon" src="../assets/images/seat-active-footer.png" alt="">
+        <span style="color: #1296db;">选座</span>
+      </div>
+      <div class="footer-item"  v-else >
+        <img class="icon" src="../assets/images/seat.png" alt="">
+        <span>选座</span>
+      </div>
     </div>
-    <div class="footer-item" @click="goTo('/order')">
-      <img class="icon" src="../assets/images/order.png" alt="">
-      <span>订单</span>
+    <div class="footer-item" @click="goTo('/order','order')">
+      <div class="footer-item"  v-if="active === 'order'" >
+        <img class="icon" src="../assets/images/order-active.png" alt="">
+        <span style="color: #1296db;">订单</span>
+      </div>
+      <div class="footer-item"  v-else>
+        <img class="icon" src="../assets/images/order.png" alt="">
+        <span>订单</span>
+      </div>
     </div>
     <div class="footer-item" @click="logout">
       <img class="icon" src="../assets/images/logout.png" alt="">
@@ -17,8 +29,14 @@
 
 <script>
 export default {
+  data () {
+    return {
+      active: 'seat'
+    }
+  },
   methods: {
-    goTo (path) {
+    goTo (path, bar) {
+      this.active = bar
       this.$router.push(path)
     },
     logout () {
