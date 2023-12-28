@@ -9,7 +9,6 @@
               </template>
               <el-menu-item-group title="查看">
                 <el-menu-item index="/">模版列表</el-menu-item>
-                <el-menu-item index="/order">订单列表</el-menu-item>
               </el-menu-item-group>
               <el-menu-item-group title="编辑">
                 <el-menu-item index="hallSeat">新增模版</el-menu-item>

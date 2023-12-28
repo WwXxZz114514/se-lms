@@ -9,7 +9,7 @@
         </div>
         <div>
           密码：
-          <input v-model="password" class="input" type="text" placeholder="请输入密码" />
+          <input v-model="password" class="input" type="password" placeholder="请输入密码" />
         </div>
       </div>
       <div class="login-free">
@@ -32,15 +32,21 @@ export default {
     }
   },
   mounted () {
-    this.username = localStorage.getItem('username') || ''
-    this.password = localStorage.getItem('password') || ''
+    if (localStorage.getItem('username')) {
+      this.username = localStorage.getItem('username')
+    }
+    if (localStorage.getItem('password')) {
+      this.password = localStorage.getItem('password')
+      this.isLoginFree = true
+    }
   },
   methods: {
     login () {
-      this.$post('/user/login', {
+      this.$post('/users/user/login', {
         username: this.username,
         password: this.password
       }).then(res => {
+        console.log(res)
         if (res.code === 200) {
           if (this.isLoginFree) {
             localStorage.setItem('username', this.username)
@@ -50,8 +56,6 @@ export default {
             localStorage.removeItem('password')
           }
           this.$router.push('/hall-seat')
-        } else {
-          this.$message.error(res.msg)
         }
       })
     }

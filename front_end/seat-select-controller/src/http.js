@@ -1,7 +1,9 @@
 import axios from 'axios'
 
 axios.defaults.timeout = 10000
-axios.defaults.baseURL = ''
+axios.defaults.baseURL = 'https://172.29.17.63:8080'
+axios.defaults.withCredentials = true
+
 // http request 拦截器
 axios.interceptors.request.use(
   config => {
@@ -136,6 +138,24 @@ export function put (url, data = {}) {
     axios.put(url, data).then(response => {
       resolve(response.data)
     }, err => {
+      reject(err)
+    })
+  })
+}
+
+/**
+ * 封装patch请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+export function Delete (url, params = {}) {
+  return new Promise((resolve, reject) => {
+    axios.delete(url, {
+      params: params
+    }).then(response => {
+      resolve(response.data)
+    }).catch(err => {
       reject(err)
     })
   })

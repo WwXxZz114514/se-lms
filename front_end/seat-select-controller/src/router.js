@@ -8,6 +8,11 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/pages/login/index.vue')
+    },
+    {
       path: '/',
       name: 'seatList',
       component: SeatList
@@ -20,11 +25,6 @@ export default new Router({
         console.log('hello')
         next(false)
       }
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import('@/pages/login/index.vue')
     },
     {
       path: '/order',

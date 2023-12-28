@@ -6,7 +6,6 @@
       </div>
       <el-aside>
         <controller-aside
-        @markSeats="markSeats"
         @clearSeat="clearSeat"
         @confirm="confirm"
         :prop_x="x"
@@ -99,9 +98,6 @@ export default {
           duration: 2000
         })
       })
-    },
-    markSeats (e) {
-      this.$refs.coordinateSystem.markSeats(e)
     },
     clearSeat () {
       this.$refs.coordinateSystem.clearSeat()

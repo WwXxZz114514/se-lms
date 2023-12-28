@@ -17,14 +17,14 @@ module.exports = {
     types.forEach(type => addStyleResource(config.module.rule('stylus').oneOf(type)))
   },
   devServer: {
-    proxy: {
-      '/mock': {
-        target: 'http://localhost:80',
-        pathRewrite: {
-          '^/mock': '/mock'
-        }
-      }
-    }
+    // proxy: {
+    //   '/mock': {
+    //     target: 'http://localhost:80',
+    //     pathRewrite: {
+    //       '^/mock': '/mock'
+    //     }
+    //   }
+    // }
   }
 }
 function addStyleResource (rule) {

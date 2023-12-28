@@ -64,20 +64,23 @@ export default {
   },
   mounted () {
     this.form.username = localStorage.getItem('username') || ''
-    this.form.password = localStorage.getItem('password') || ''
+    if (localStorage.getItem('password')) {
+      this.form.password = localStorage.getItem('password') || ''
+      this.checked = true
+    }
   },
   methods: {
     login (form) {
       this.$refs[form].validate((valid) => {
         if (valid) {
-          this.$post('/admin/login', {
-            username: this.username,
-            password: this.password
+          this.$post('/users/admin/login', {
+            username: this.form.username,
+            password: this.form.password
           }).then((res) => {
             if (res.code === 200) {
               if (this.checked) {
-                localStorage.setItem('username', this.username)
-                localStorage.setItem('password', this.password)
+                localStorage.setItem('username', this.form.username)
+                localStorage.setItem('password', this.form.password)
               }
               this.$message({
                 message: '登录成功啦',

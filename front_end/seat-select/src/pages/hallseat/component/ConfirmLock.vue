@@ -193,7 +193,7 @@ export default {
 //@import url(); 引入公共css类
 .confirm
   position fixed
-  bottom 0
+  bottom 200px
   z-index 10
   width 750px
   background: linear-gradient(to right, #6F50F5,#C26DFE);

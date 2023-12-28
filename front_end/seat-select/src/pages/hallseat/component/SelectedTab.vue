@@ -75,7 +75,7 @@ export default {
 .selected
   position fixed
   z-index 10
-  bottom 90px
+  bottom 300px
   background #ffffff
   width 750px
   padding 20px 0 20px 20px

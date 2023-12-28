@@ -1,10 +1,7 @@
 <template>
 	<div id="header">
 		<!-- <div class="back" v-show="showLeft" @click="backClick"> 返回</div> -->
-		<slot name='leftView'><div class="back"></div></slot>
 		<slot name='titleView'><div class="title">{{titleText}}</div></slot>
-		<slot name='rightView'><div class="right"></div></slot>
-		<slot></slot>
 	</div>
 </template>
 
@@ -29,6 +26,8 @@ export default {
 <style scoped="scoped">
 	#header{
 		display: flex;
+    justify-content: center;
+    align-items: center;
 		background: linear-gradient(to right, #6F50F5,#C26DFE);
 		height: 81px;
 		width: 100%;

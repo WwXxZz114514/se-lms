@@ -7,10 +7,13 @@
         </el-breadcrumb>
         <div class="back">
         <el-button icon="el-icon-full-screen" circle @click="handleFullScreen"></el-button>
-         <el-button
+        <el-button
                 size="small"
                 type="danger"
                 @click="handleMultipleDelete()">删除选中</el-button>
+        <el-button
+          size="small"
+          @click="logout()">退出登录</el-button>
       </div>
       </el-header>
 
@@ -24,36 +27,32 @@
             width="55">
           </el-table-column>
           <el-table-column
-            fixed
-            label="创建日期"
-            width="180">
-             <template slot-scope="scope">
-              <i class="el-icon-time"></i>
-              <span style="margin-left: 10px">{{ scope.row.createTime }}</span>
-            </template>
+            prop="area_id"
+            label="id"
+            width="250"
+            >
           </el-table-column>
+
           <el-table-column
+            prop="area_name"
             align="center"
-            label="模版名称"
-            width="250">
-            <template slot-scope="scope">
-              <el-popover trigger="hover" placement="top">
-                <p  style="margin-bottom:10px">姓名: {{ scope.row.name }}</p>
-                <p>价格: ¥{{ scope.row.price }}</p>
-                <div slot="reference" class="name-wrapper">
-                  <el-tag size="medium">{{ scope.row.name }}</el-tag>
-                </div>
-              </el-popover>
-            </template>
+            label="名称"
+            width="250"
+            >
           </el-table-column>
           <el-table-column
-            prop="seatNum"
-            label="价格"
-            width="250">
-            <template slot-scope="scope">
-              <i class="el-icon-money"></i>
-              <span style="margin-left: 10px">¥{{ scope.row.price }}</span>
-            </template>
+            prop="row_num"
+            align="center"
+            label="排数"
+            width="250"
+            >
+          </el-table-column>
+          <el-table-column
+            prop="col_num"
+            align="center"
+            label="列数"
+            width="250"
+            >
           </el-table-column>
           <el-table-column
             fixed="right"
@@ -62,11 +61,11 @@
             <template slot-scope="scope">
               <el-button
                 size="mini"
-                @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                @click="handleEdit(scope.row)">编辑</el-button>
               <el-button
                 size="mini"
                 type="danger"
-                @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                @click="handleDelete(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -94,11 +93,14 @@ export default {
     ]),
     handleSelectionChange (val) {
       this.multipleSelection = val
+      console.log(this.multipleSelection)
     },
     getTempleteList () {
-      this.$post(this.interfaceURL + 'findTempleteList ').then((response) => {
+      this.$get('/areas', {
+        area_id: 0
+      }).then((response) => {
         console.log(response)
-        this.tableData = response.data
+        this.tableData = response.data.areas_info
       }, err => {
         this.$notify.error({
           title: '警告',
@@ -107,46 +109,53 @@ export default {
         })
       })
     },
-    handleEdit (index, row) {
-      this.$router.push({ name: 'hallSeat',
-        params: { templeteId: row.id }
-      })
-    },
-    handleDelete (index, row) {
-      console.log(index, row)
-      this.$post(this.interfaceURL + 'deleteTemplete', { 'idList': [row.id] }).then((response) => {
-        console.log(response)
-        if (response.errCode === 0) {
-          this.tableData.splice(index, 1)
-        } else {
-          this.$notify.error({
-            title: '警告',
-            message: '系统内部错误',
-            duration: 2000
-          })
-        }
-      }, err => {
-        this.$notify.error({
-          title: '警告',
-          message: err.message,
-          duration: 2000
-        })
-      })
-    },
-    handleMultipleDelete () {
-      let idList = this.multipleSelection.map((el) => (el.id))
-      if (idList.length > 0) {
-        this.$post(this.interfaceURL + 'deleteTemplete', { 'idList': idList }).then((response) => {
-          console.log(response)
-          if (response.errCode === 0) {
-            this.$router.go(0)
+    handleEdit (row) {
+      this.$prompt('请修改模板名称', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        inputPattern: /^.+$/,
+        inputErrorMessage: '模板名称不能为空'
+      }).then(({ value }) => {
+        this.$patch('/areas', {
+          area_id: row.area_id,
+          area_name: value
+        }).then(res => {
+          if (res.code === 200) {
+            this.$message({
+              type: 'success',
+              message: '修改成功!'
+            })
+            this.getTempleteList()
           } else {
-            this.$notify.error({
-              title: '警告',
-              message: '系统内部错误',
-              duration: 2000
+            this.$message({
+              type: 'error',
+              message: '修改失败!'
             })
           }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        })
+      })
+    },
+    handleDelete (area) {
+      this.$confirm('此操作将永久删除模板, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        console.log(area)
+        this.$delete('/areas', {
+          area_id: area.area_id
+        }).then((response) => {
+          console.log(response)
+          this.getTempleteList()
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
         }, err => {
           this.$notify.error({
             title: '警告',
@@ -154,14 +163,32 @@ export default {
             duration: 2000
           })
         })
-      } else {
-        this.$notify({
-          title: '警告',
-          message: '请至少选择一个模版',
-          type: 'warning',
-          duration: 2000
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
         })
-      }
+      })
+    },
+    handleMultipleDelete () {
+      this.multipleSelection.forEach((el) => {
+        this.$delete('/areas', {
+          area_id: el.area_id
+        }).then((response) => {
+          console.log(response)
+          this.getTempleteList()
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+        }, err => {
+          this.$notify.error({
+            title: '警告',
+            message: err.message,
+            duration: 2000
+          })
+        })
+      })
     },
     handleFullScreen () {
       let element = document.documentElement
@@ -198,18 +225,22 @@ export default {
         })
       }
       this.makeFullscreen(!this.fullscreen)
-    }
-  },
-  mounted () {
-    var templeteName = this.$route.params.templeteName
-    if (templeteName !== undefined) {
-      this.$notify({
-        title: '成功',
-        message: '模版名称为: `' + templeteName + '` 已经保存',
-        type: 'success',
-        duration: 2000
+    },
+    logout () {
+      this.$post('/users/admin/logout').then(res => {
+        if (res.code === 200) {
+          this.$router.push('/login')
+        } else {
+          this.$message({
+            type: 'error',
+            message: '退出失败!'
+          })
+        }
       })
     }
+  },
+
+  mounted () {
     this.getTempleteList()
   }
 }

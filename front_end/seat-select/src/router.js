@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HallSeat from '@/pages/hallseat/HallSeat'
+import HallSeat from '@/pages/hallseat/index'
 Vue.use(Router)
 
 export default new Router({

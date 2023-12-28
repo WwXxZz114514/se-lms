@@ -57,6 +57,7 @@
     @loading="loading"
     ></confirm-lock>
     <loading :load="load"></loading>
+    <Footer />
   </div>
 </template>
 <script>
@@ -67,6 +68,7 @@ import QuickSelectTab from './component/QuickSelectTab'
 import ConfirmLock from './component/ConfirmLock'
 import HeaderView from '@/components/Header'
 import Loading from '@/components/loading'
+import Footer from '@/components/Footer'
 export default {
   name: 'HallSeat',
   data () {
@@ -96,7 +98,8 @@ export default {
     SelectedTab,
     QuickSelectTab,
     ConfirmLock,
-    Loading
+    Loading,
+    Footer
   },
   mounted () {
     this.loading(true)
@@ -393,7 +396,6 @@ export default {
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped="scoped">
   .wapper
-    width: 270px
     width 750px
     background #f3f4f6
     .seat-detail-item
