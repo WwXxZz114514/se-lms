@@ -1,5 +1,6 @@
 package com.szuse.f4.controller;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,28 @@ public class OrderController {
   @Autowired
   private AreaMapper areaMapper;
 
+  @GetMapping("/orders/history")
+  public ResponseJSON getHistoryOrders(HttpServletRequest request) {
+
+    User user = (User) request.getSession().getAttribute("user");
+    Admin admin = (Admin) request.getSession().getAttribute("admin");
+    JSONObject returnObject = new JSONObject();
+    if (admin == null) {
+      if (user == null) {
+        throw new UnauthorizedException("Please login first");
+      }
+      // User
+      returnObject.put("order_info", makeReturnObjects(orderMapper.getOrdersByUserId(user.getId())));
+    } else {
+      // Admin
+      returnObject.put("order_info", makeReturnObjects(orderMapper.getOrders()));
+    }
+    return new ResponseJSON(200, "success", returnObject);
+  }
+
   @GetMapping("/orders")
   public ResponseJSON getOrders(HttpServletRequest request,
-      @RequestParam("order_id") int orderId) {
+      @RequestParam(value = "order_id", required = false, defaultValue = "0") int orderId) {
 
     User user = (User) request.getSession().getAttribute("user");
     Admin admin = (Admin) request.getSession().getAttribute("admin");
@@ -47,7 +67,7 @@ public class OrderController {
         throw new UnauthorizedException("Please login first");
       }
       if (orderId == 0) {
-        Order[] myOrders = orderMapper.getOrdersByUserId(user.getId());
+        Order[] myOrders = orderMapper.getValidOrdersByUserId(user.getId());
         returnObject.put("order_info", makeReturnObjects(myOrders));
       } else {
         Order[] orders = new Order[] { orderMapper.getOrderByOrderId(orderId) };
@@ -58,9 +78,10 @@ public class OrderController {
         return new ResponseJSON(200, "success", returnObject);
       }
     }
+    // Admin
     if (orderId == 0) {
-      // return all orders
-      returnObject.put("order_info", makeReturnObjects(orderMapper.getOrders()));
+      // return all valid orders
+      returnObject.put("order_info", makeReturnObjects(orderMapper.getValidOrders()));
     } else {
       Order[] orders = new Order[] { orderMapper.getOrderByOrderId(orderId) };
       returnObject.put("order_info", makeReturnObjects(orders));
@@ -77,9 +98,16 @@ public class OrderController {
     if (admin == null) {
       if (user == null) {
         throw new UnauthorizedException("Please login first");
-      } else if (order.getUserId() != user.getId()) {
-        throw new ForbiddenException("You are not authorized to update this order");
       }
+      order.setUserId(user.getId());
+    }
+    Seat seat = seatMapper.getSeatBySeatId(order.getSeatId());
+    if (seat == null) {
+      throw new ForbiddenException("Invalid seat id");
+    }
+    Timestamp appointmentTimestamp = order.getAppointmentTime();
+    if (appointmentTimestamp.before(new Timestamp(System.currentTimeMillis()))) {
+      throw new ForbiddenException("Invalid appointment time");
     }
     orderMapper.insertOrder(order);
     return new ResponseJSON(200, "success");
@@ -133,6 +161,7 @@ public class OrderController {
     returnObject.put("area_name", area.getAreaName());
     returnObject.put("time", sdf.format(order.getAppointmentTime()));
     returnObject.put("seat", seatStatus);
+    returnObject.put("status", order.getOrderStatus());
     return returnObject;
   }
 

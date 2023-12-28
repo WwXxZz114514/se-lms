@@ -36,52 +36,36 @@ public class SeatController {
 
   private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-  private static final JSONArray seatTypeList = new JSONArray() {
-    {
-      add(new JSONObject() {
-        {
-          put("type", 0);
-          put("name", "Available");
-        }
-      });
-      add(new JSONObject() {
-        {
-          put("type", 1);
-          put("name", "Occupied");
-        }
-      });
-      add(new JSONObject() {
-        {
-          put("type", 2);
-          put("name", "Selected");
-        }
-      });
-    }
-  };
-
   @GetMapping("/seats")
   public ResponseJSON getSeatList(HttpServletRequest request,
-      @RequestBody Query query) {
+      @RequestParam(value = "seat_id", required = false, defaultValue = "0") int seatId,
+      @RequestParam(value = "appointment_time", required = false, defaultValue = "") String appointmentTimeString,
+      @RequestParam(value = "area_id", required = false, defaultValue = "0") int areaId) {
 
-    int seatId = query.getSeatId();
-    String appointmentTimeString = query.getAppointmentTimeString();
-    int areaId = query.getAreaId();
     if (seatId != 0 && areaId != 0) {
       throw new BadRequestException("Invalid parameters");
     }
 
+    Date appointmentTime = null;
+    if (!appointmentTimeString.equals("")) {
+      try {
+        appointmentTime = sdf.parse(appointmentTimeString);
+      } catch (ParseException e) {
+        throw new BadRequestException("Invalid time format");
+      }
+    }
+
     JSONArray seatList = new JSONArray();
     if (areaId != 0) {
-      Area area = areaMapper.getAreaByAreaId(areaId);
       Seat[] seats = seatMapper.getSeatsByAreaId(areaId);
       for (Seat seat : seats) {
-        seatList.add(appointmentTimeString != null ? makeSeatListObject(seat, appointmentTimeString)
-          : seat);
+        seatList.add(appointmentTime != null ? makeSeatListObject(seat, appointmentTime) : seat);
       }
-    } else {
+    } else if (seatId != 0) {
       Seat seat = seatMapper.getSeatBySeatId(seatId);
-      seatList.add(appointmentTimeString != null ? makeSeatListObject(seat, appointmentTimeString)
-        : seat);
+      seatList.add(appointmentTime != null ? makeSeatListObject(seat, appointmentTime) : seat);
+    } else {
+      throw new BadRequestException("Area id or seat id must be specified");
     }
 
     JSONObject returnObject = new JSONObject();
@@ -90,64 +74,22 @@ public class SeatController {
     return new ResponseJSON(200, "success", returnObject);
   }
 
-  private JSONObject makeSeatListObject(Seat seat, String appointmentTimeString) {
-    Date appointmentTime;
-    try {
-      appointmentTime = sdf.parse(appointmentTimeString);
-    } catch (ParseException e) {
-      throw new BadRequestException("Invalid parameters");
-    }
+  private JSONObject makeSeatListObject(Seat seat, Date appointmentTime) {
     Timestamp appointmentTimestamp = new Timestamp(appointmentTime.getTime());
 
     Order order = orderMapper.getOrderBySeatAndAppointmentTime(seat.getSeatId(), appointmentTimestamp);
+    boolean isAvailable = false;
+    if (order.getOrderStatus() != 0) {
+      isAvailable = true;
+    }
 
     JSONObject seatListObject = new JSONObject();
     seatListObject.put("seat_id", seat.getSeatId());
     seatListObject.put("seat_row", seat.getSeatRow());
     seatListObject.put("seat_col", seat.getSeatCol());
     seatListObject.put("area_id", seat.getAreaId());
-    seatListObject.put("type", order == null ? 0 : 1);
+    seatListObject.put("type", isAvailable ? 1 : 0);
     return seatListObject;
-  }
-
-}
-
-class Query {
-  private int seatId;
-  private String appointmentTimeString;
-  private int areaId;
-
-  public Query() {
-  }
-
-  public Query(int seatId, String appointmentTimeString, int areaId) {
-    this.seatId = seatId;
-    this.appointmentTimeString = appointmentTimeString;
-    this.areaId = areaId;
-  }
-
-  public int getSeatId() {
-    return seatId;
-  }
-
-  public void setSeatId(int seatId) {
-    this.seatId = seatId;
-  }
-
-  public String getAppointmentTimeString() {
-    return appointmentTimeString;
-  }
-
-  public void setAppointmentTimeString(String appointmentTimeString) {
-    this.appointmentTimeString = appointmentTimeString;
-  }
-
-  public int getAreaId() {
-    return areaId;
-  }
-
-  public void setAreaId(int areaId) {
-    this.areaId = areaId;
   }
 
 }

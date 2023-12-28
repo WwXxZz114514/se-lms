@@ -26,7 +26,7 @@ public class AreaController {
   private AreaMapper areaMapper;
 
   @GetMapping("/areas")
-  public ResponseJSON getAreas(@RequestParam("area_id") int areaId) {
+  public ResponseJSON getAreas(@RequestParam(value = "area_id", required = false, defaultValue = "0") int areaId) {
     JSONObject returnObject = new JSONObject();
     Area[] areas;
     if (areaId != 0) {

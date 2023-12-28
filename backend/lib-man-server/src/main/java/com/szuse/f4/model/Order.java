@@ -18,16 +18,19 @@ public class Order {
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
   @JsonProperty("appointment_time")
   private Timestamp appointmentTime;
+  @JsonProperty("status")
+  private int orderStatus;
 
   public Order() {
   }
 
-  public Order(int orderId, int userId, int seatId, Timestamp orderTime, Timestamp appointmentTime) {
+  public Order(int orderId, int userId, int seatId, Timestamp orderTime, Timestamp appointmentTime, int orderStatus) {
     this.orderId = orderId;
     this.userId = userId;
     this.seatId = seatId;
     this.orderTime = orderTime;
     this.appointmentTime = appointmentTime;
+    this.orderStatus = orderStatus;
   }
 
   public Order(int userId, int seatId, Timestamp appointmentTime) {
@@ -74,6 +77,14 @@ public class Order {
 
   public void setAppointmentTime(Timestamp appointmentTime) {
     this.appointmentTime = appointmentTime;
+  }
+
+  public int getOrderStatus() {
+    return orderStatus;
+  }
+
+  public void setOrderStatus(int orderStatus) {
+    this.orderStatus = orderStatus;
   }
 
 }

@@ -18,7 +18,8 @@ public interface OrderMapper {
       @Result(property = "userId", column = "user_id"),
       @Result(property = "seatId", column = "seat_id"),
       @Result(property = "orderTime", column = "order_time"),
-      @Result(property = "appointmentTime", column = "appointment_time")
+      @Result(property = "appointmentTime", column = "appointment_time"),
+      @Result(property = "orderStatus", column = "order_status")
   })
   Order getOrderByOrderId(int orderId);
 
@@ -28,7 +29,8 @@ public interface OrderMapper {
       @Result(property = "userId", column = "user_id"),
       @Result(property = "seatId", column = "seat_id"),
       @Result(property = "orderTime", column = "order_time"),
-      @Result(property = "appointmentTime", column = "appointment_time")
+      @Result(property = "appointmentTime", column = "appointment_time"),
+      @Result(property = "orderStatus", column = "order_status")
   })
   Order[] getOrders();
 
@@ -38,7 +40,8 @@ public interface OrderMapper {
       @Result(property = "userId", column = "user_id"),
       @Result(property = "seatId", column = "seat_id"),
       @Result(property = "orderTime", column = "order_time"),
-      @Result(property = "appointmentTime", column = "appointment_time")
+      @Result(property = "appointmentTime", column = "appointment_time"),
+      @Result(property = "orderStatus", column = "order_status")
   })
   Order[] getOrdersByUserId(int userId);
 
@@ -54,19 +57,43 @@ public interface OrderMapper {
       @Result(property = "userId", column = "user_id"),
       @Result(property = "seatId", column = "seat_id"),
       @Result(property = "orderTime", column = "order_time"),
-      @Result(property = "appointmentTime", column = "appointment_time")
+      @Result(property = "appointmentTime", column = "appointment_time"),
+      @Result(property = "orderStatus", column = "order_status")
   })
   Order[] getOrdersByAppointmentTime(Timestamp appointmentTime);
 
-  @Select("SELECT * FROM tb_order WHERE seat_id = #{seatId} AND appointment_time = #{appointmentTime}")
+  @Select("SELECT * FROM tb_order WHERE appointment_time < NOW() AND seat_id = #{seatId}")
   @Results({
       @Result(property = "orderId", column = "order_id"),
       @Result(property = "userId", column = "user_id"),
       @Result(property = "seatId", column = "seat_id"),
       @Result(property = "orderTime", column = "order_time"),
-      @Result(property = "appointmentTime", column = "appointment_time")
+      @Result(property = "appointmentTime", column = "appointment_time"),
+      @Result(property = "orderStatus", column = "order_status")
   })
   Order getOrderBySeatAndAppointmentTime(int seatId, Timestamp appointmentTime);
+
+  @Select("SELECT * FROM tb_order WHERE order_status = 0")
+  @Results({
+      @Result(property = "orderId", column = "order_id"),
+      @Result(property = "userId", column = "user_id"),
+      @Result(property = "seatId", column = "seat_id"),
+      @Result(property = "orderTime", column = "order_time"),
+      @Result(property = "appointmentTime", column = "appointment_time"),
+      @Result(property = "orderStatus", column = "order_status")
+  })
+  Order[] getValidOrders();
+
+  @Select("SELECT * FROM tb_order WHERE order_status = 0 AND user_id = #{userId}")
+  @Results({
+      @Result(property = "orderId", column = "order_id"),
+      @Result(property = "userId", column = "user_id"),
+      @Result(property = "seatId", column = "seat_id"),
+      @Result(property = "orderTime", column = "order_time"),
+      @Result(property = "appointmentTime", column = "appointment_time"),
+      @Result(property = "orderStatus", column = "order_status")
+  })
+  Order[] getValidOrdersByUserId(int userId);
 
   @Delete("DELETE FROM tb_order WHERE order_id = #{orderId}")
   void deleteOrderByOrderId(int orderId);
