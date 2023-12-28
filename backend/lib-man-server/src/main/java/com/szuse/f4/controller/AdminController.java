@@ -41,7 +41,11 @@ public class AdminController {
   }
 
   @PostMapping("/users/admin/register")
-  public ResponseJSON register(@RequestBody Admin admin) {
+  public ResponseJSON register(HttpServletRequest request,
+      @RequestBody Admin admin) {
+    if (request.getSession().getAttribute("admin") == null) {
+      throw new UnauthorizedException("Authorized admins only");
+    }
     String username = admin.getUsername();
     String tel = admin.getTel();
     String password = admin.getPassword();

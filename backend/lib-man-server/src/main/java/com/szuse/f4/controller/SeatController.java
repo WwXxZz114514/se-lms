@@ -69,10 +69,13 @@ public class SeatController {
   private JSONObject makeSeatListObject(Seat seat, Date appointmentTime) {
     Timestamp appointmentTimestamp = new Timestamp(appointmentTime.getTime());
 
-    Order order = orderMapper.getOrderBySeatAndAppointmentTime(seat.getSeatId(), appointmentTimestamp);
-    boolean isAvailable = false;
-    if (order == null || order.getOrderStatus() != 0) {
-      isAvailable = true;
+    Order[] orders = orderMapper.getOrdersBySeatAndAppointmentTime(seat.getSeatId(), appointmentTimestamp);
+    boolean isAvailable = true;
+    for (Order o : orders) {
+      if (o.getOrderStatus() == 0) {
+        isAvailable = false;
+        break;
+      }
     }
 
     JSONObject seatListObject = new JSONObject();
@@ -80,7 +83,7 @@ public class SeatController {
     seatListObject.put("seat_row", seat.getSeatRow());
     seatListObject.put("seat_col", seat.getSeatCol());
     seatListObject.put("area_id", seat.getAreaId());
-    seatListObject.put("type", isAvailable ? 1 : 0);
+    seatListObject.put("is_available", isAvailable ? 1 : 0);
     return seatListObject;
   }
 

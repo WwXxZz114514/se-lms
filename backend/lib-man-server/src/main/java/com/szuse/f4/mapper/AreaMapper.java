@@ -1,9 +1,11 @@
 package com.szuse.f4.mapper;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
 import com.szuse.f4.model.Area;
 
@@ -36,7 +38,8 @@ public interface AreaMapper {
   })
   Area[] getAreas();
 
-  @Update("INSERT INTO tb_area (area_name, area_rows, area_cols) VALUES (#{areaName}, #{areaRows}, #{areaCols})")
+  @Insert("INSERT INTO tb_area (area_name, area_rows, area_cols) VALUES (#{areaName}, #{areaRows}, #{areaCols})")
+  @Options(useGeneratedKeys = true, keyProperty = "areaId", keyColumn = "area_id")
   void insertArea(Area area);
 
   @Update("UPDATE tb_area SET area_name = #{areaName}, area_rows = #{areaRows}, area_cols = #{areaCols} WHERE area_id = #{areaId}")

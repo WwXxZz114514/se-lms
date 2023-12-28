@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
+
 import com.alibaba.fastjson2.JSONObject;
 
 import com.szuse.f4.model.*;
@@ -116,18 +117,24 @@ public class OrderController {
     Timestamp appointmentTimestamp = order.getAppointmentTime();
     if (appointmentTimestamp.before(new Timestamp(System.currentTimeMillis()))) {
       throw new ForbiddenException("Invalid appointment time");
+    } else if (appointmentTimestamp.after(new Timestamp(System.currentTimeMillis() + 2 * 24 * 60 * 60 * 1000))) {
+      throw new ForbiddenException("Invalid appointment time");
     }
     try {
       orderMapper.insertOrder(order);
-      orderMapper.updateExpiredOrders();
     } catch (Exception e) {
-      Order existOrder = orderMapper.getOrderBySeatAndAppointmentTime(order.getSeatId(), appointmentTimestamp);
-      if (existOrder != null) {
-        throw new ForbiddenException("Seat not available");
+      Order[] existOrder = orderMapper.getOrdersBySeatAndAppointmentTime(order.getSeatId(), appointmentTimestamp);
+      for (Order o : existOrder) {
+        if (o.getOrderStatus() == 0) {
+          throw new ForbiddenException("Seat not available");
+        }
       }
       throw new ForbiddenException("You have already booked a seat");
     }
-    return new ResponseJSON(200, "success");
+    orderMapper.updateExpiredOrders();
+    JSONObject returnObject = new JSONObject();
+    returnObject.put("order_id", order.getOrderId());
+    return new ResponseJSON(200, "success", returnObject);
   }
 
   @PatchMapping("/orders")
@@ -177,7 +184,13 @@ public class OrderController {
 
   private JSONObject makeReturnObject(Order order) {
     Seat seat = seatMapper.getSeatBySeatId(order.getSeatId());
+    if (seat == null) {
+      throw new BadRequestException("Invalid seat id");
+    }
     Area area = areaMapper.getAreaByAreaId(seat.getAreaId());
+    if (area == null) {
+      throw new BadRequestException("Invalid area id");
+    }
     JSONObject seatStatus = new JSONObject();
     seatStatus.put("seat_id", seat.getSeatId());
     seatStatus.put("seat_row", seat.getSeatRow());

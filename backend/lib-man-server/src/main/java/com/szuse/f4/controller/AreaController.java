@@ -56,13 +56,14 @@ public class AreaController {
     } catch (Exception e) {
       throw new BadRequestException("Area already exists");
     }
-    area = areaMapper.getAreaByAreaName(area.getAreaName());
     for (int i = 1; i <= area.getAreaRows(); i++) {
       for (int j = 1; j <= area.getAreaCols(); j++) {
         seatMapper.insertSeat(new Seat(i, j, area.getAreaId()));
       }
     }
-    return new ResponseJSON(200, "success");
+    JSONObject returnObject = new JSONObject();
+    returnObject.put("area_id", area.getAreaId());
+    return new ResponseJSON(200, "success", returnObject);
   }
 
   @PatchMapping("/areas")
