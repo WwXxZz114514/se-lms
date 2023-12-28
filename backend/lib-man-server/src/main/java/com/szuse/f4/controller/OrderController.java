@@ -109,7 +109,12 @@ public class OrderController {
     if (appointmentTimestamp.before(new Timestamp(System.currentTimeMillis()))) {
       throw new ForbiddenException("Invalid appointment time");
     }
-    orderMapper.insertOrder(order);
+    try {
+      orderMapper.insertOrder(order);
+      orderMapper.updateExpiredOrders();
+    } catch (Exception e) {
+      throw new ForbiddenException("Seat is not available");
+    }
     return new ResponseJSON(200, "success");
   }
 
@@ -155,7 +160,6 @@ public class OrderController {
     seatStatus.put("seat_id", seat.getSeatId());
     seatStatus.put("seat_row", seat.getSeatRow());
     seatStatus.put("seat_col", seat.getSeatCol());
-    seatStatus.put("type", 1);
     JSONObject returnObject = new JSONObject();
     returnObject.put("order_id", order.getOrderId());
     returnObject.put("area_name", area.getAreaName());

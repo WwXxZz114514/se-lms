@@ -6,7 +6,7 @@ server:
   #  trust-certificate: "classpath:ca-cert.crt"
   servlet:
     session:
-      timeout: 60 # sec
+      timeout: 600 # sec
 
 # 开发环境使用H2
 spring:

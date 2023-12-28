@@ -1189,3 +1189,303 @@ java.lang.NullPointerException: Cannot invoke "com.szuse.f4.model.Order.getUserI
 2023-12-28T12:25:47.719+08:00 DEBUG 14640 --- [http-nio-8080-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@2ae62918]
 2023-12-28T12:25:47.720+08:00 DEBUG 14640 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
 2023-12-28T12:26:01.982+08:00 DEBUG 14640 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/areas?area_id=1", parameters={masked}
+2023-12-28T12:26:01.982+08:00 DEBUG 14640 --- [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.AreaController#getAreas(int)
+2023-12-28T12:26:01.983+08:00 DEBUG 14640 --- [http-nio-8080-exec-9] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:26:01.984+08:00 DEBUG 14640 --- [http-nio-8080-exec-9] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@4e5c8630]
+2023-12-28T12:26:01.984+08:00 DEBUG 14640 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-28T12:46:55.846+08:00  INFO 14640 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-28T12:46:55.847+08:00  INFO 14640 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-12-28T12:47:00.296+08:00  INFO 17456 --- [main] com.szuse.f4.LibManServerApplication     : Starting LibManServerApplication using Java 18.0.2.1 with PID 17456 (C:\Users\user\Downloads\se\se-lms\backend\lib-man-server\target\classes started by user in C:\Users\user\Downloads\se\se-lms\backend\lib-man-server)
+2023-12-28T12:47:00.298+08:00  INFO 17456 --- [main] com.szuse.f4.LibManServerApplication     : No active profile set, falling back to 1 default profile: "default"
+2023-12-28T12:47:00.897+08:00  INFO 17456 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-12-28T12:47:00.904+08:00  INFO 17456 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-28T12:47:00.904+08:00  INFO 17456 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
+2023-12-28T12:47:00.964+08:00  INFO 17456 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-28T12:47:00.964+08:00  INFO 17456 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 637 ms
+2023-12-28T12:47:00.981+08:00  INFO 17456 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-28T12:47:01.087+08:00  INFO 17456 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2023-12-28T12:47:01.088+08:00  INFO 17456 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-28T12:47:01.095+08:00  INFO 17456 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:mem:testdb'
+2023-12-28T12:47:01.272+08:00 DEBUG 17456 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-12-28T12:47:01.320+08:00 DEBUG 17456 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 20 mappings in 'requestMappingHandlerMapping'
+2023-12-28T12:47:01.330+08:00 DEBUG 17456 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-12-28T12:47:01.337+08:00 DEBUG 17456 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-12-28T12:47:01.383+08:00  INFO 17456 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-12-28T12:47:01.388+08:00  INFO 17456 --- [main] com.szuse.f4.LibManServerApplication     : Started LibManServerApplication in 1.37 seconds (process running for 1.567)
+2023-12-28T12:49:15.106+08:00  INFO 17456 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-28T12:49:15.108+08:00  INFO 17456 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-12-28T12:49:19.656+08:00  INFO 18412 --- [main] com.szuse.f4.LibManServerApplication     : Starting LibManServerApplication using Java 18.0.2.1 with PID 18412 (C:\Users\user\Downloads\se\se-lms\backend\lib-man-server\target\classes started by user in C:\Users\user\Downloads\se\se-lms\backend\lib-man-server)
+2023-12-28T12:49:19.658+08:00  INFO 18412 --- [main] com.szuse.f4.LibManServerApplication     : No active profile set, falling back to 1 default profile: "default"
+2023-12-28T12:49:20.241+08:00  INFO 18412 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-12-28T12:49:20.247+08:00  INFO 18412 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-28T12:49:20.247+08:00  INFO 18412 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
+2023-12-28T12:49:20.307+08:00  INFO 18412 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-28T12:49:20.307+08:00  INFO 18412 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 621 ms
+2023-12-28T12:49:20.325+08:00  INFO 18412 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-28T12:49:20.427+08:00  INFO 18412 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2023-12-28T12:49:20.429+08:00  INFO 18412 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-28T12:49:20.436+08:00  INFO 18412 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:mem:testdb'
+2023-12-28T12:49:20.607+08:00 DEBUG 18412 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-12-28T12:49:20.655+08:00 DEBUG 18412 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 20 mappings in 'requestMappingHandlerMapping'
+2023-12-28T12:49:20.665+08:00 DEBUG 18412 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-12-28T12:49:20.670+08:00 DEBUG 18412 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-12-28T12:49:20.716+08:00  INFO 18412 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-12-28T12:49:20.719+08:00  INFO 18412 --- [main] com.szuse.f4.LibManServerApplication     : Started LibManServerApplication in 1.333 seconds (process running for 1.531)
+2023-12-28T12:49:41.675+08:00  INFO 18412 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-28T12:49:41.676+08:00  INFO 18412 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-12-28T12:49:45.848+08:00  INFO 12304 --- [main] com.szuse.f4.LibManServerApplication     : Starting LibManServerApplication using Java 18.0.2.1 with PID 12304 (C:\Users\user\Downloads\se\se-lms\backend\lib-man-server\target\classes started by user in C:\Users\user\Downloads\se\se-lms\backend\lib-man-server)
+2023-12-28T12:49:45.850+08:00  INFO 12304 --- [main] com.szuse.f4.LibManServerApplication     : No active profile set, falling back to 1 default profile: "default"
+2023-12-28T12:49:46.435+08:00  INFO 12304 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-12-28T12:49:46.442+08:00  INFO 12304 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-28T12:49:46.442+08:00  INFO 12304 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
+2023-12-28T12:49:46.502+08:00  INFO 12304 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-28T12:49:46.503+08:00  INFO 12304 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 625 ms
+2023-12-28T12:49:46.521+08:00  INFO 12304 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-28T12:49:46.624+08:00  INFO 12304 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2023-12-28T12:49:46.626+08:00  INFO 12304 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-28T12:49:46.632+08:00  INFO 12304 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:mem:testdb'
+2023-12-28T12:49:46.802+08:00 DEBUG 12304 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-12-28T12:49:46.850+08:00 DEBUG 12304 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 20 mappings in 'requestMappingHandlerMapping'
+2023-12-28T12:49:46.860+08:00 DEBUG 12304 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-12-28T12:49:46.866+08:00 DEBUG 12304 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-12-28T12:49:46.910+08:00  INFO 12304 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-12-28T12:49:46.916+08:00  INFO 12304 --- [main] com.szuse.f4.LibManServerApplication     : Started LibManServerApplication in 1.339 seconds (process running for 1.541)
+2023-12-28T12:49:59.346+08:00  INFO 12304 --- [http-nio-8080-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-12-28T12:49:59.346+08:00  INFO 12304 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-12-28T12:49:59.347+08:00 DEBUG 12304 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2023-12-28T12:49:59.347+08:00 DEBUG 12304 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2023-12-28T12:49:59.347+08:00 DEBUG 12304 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2023-12-28T12:49:59.347+08:00 DEBUG 12304 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@258df6d9
+2023-12-28T12:49:59.348+08:00 DEBUG 12304 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@4dba882f
+2023-12-28T12:49:59.348+08:00 DEBUG 12304 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2023-12-28T12:49:59.348+08:00  INFO 12304 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-12-28T12:49:59.350+08:00 DEBUG 12304 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/users/user/login", parameters={}
+2023-12-28T12:49:59.357+08:00 DEBUG 12304 --- [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.UserController#login(HttpServletRequest, User)
+2023-12-28T12:49:59.408+08:00 DEBUG 12304 --- [http-nio-8080-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.szuse.f4.model.User@7e25ca9a]
+2023-12-28T12:49:59.454+08:00 DEBUG 12304 --- [http-nio-8080-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:49:59.455+08:00 DEBUG 12304 --- [http-nio-8080-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@24c0cfe8]
+2023-12-28T12:49:59.460+08:00 DEBUG 12304 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-28T12:50:01.657+08:00 DEBUG 12304 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/orders/history", parameters={}
+2023-12-28T12:50:01.657+08:00 DEBUG 12304 --- [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.OrderController#getHistoryOrders(HttpServletRequest)
+2023-12-28T12:50:01.662+08:00 DEBUG 12304 --- [http-nio-8080-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:50:01.662+08:00 DEBUG 12304 --- [http-nio-8080-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@4efe07bd]
+2023-12-28T12:50:01.674+08:00 DEBUG 12304 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-28T12:50:11.275+08:00 DEBUG 12304 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/orders", parameters={}
+2023-12-28T12:50:11.276+08:00 DEBUG 12304 --- [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.OrderController#insertOrder(HttpServletRequest, Order)
+2023-12-28T12:50:11.283+08:00 DEBUG 12304 --- [http-nio-8080-exec-9] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.szuse.f4.model.Order@5d5f6e06]
+2023-12-28T12:50:11.284+08:00 DEBUG 12304 --- [http-nio-8080-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler com.szuse.f4.common.exception.GlobalExceptionHandler#handleForbiddenException(ForbiddenException)
+2023-12-28T12:50:11.285+08:00 DEBUG 12304 --- [http-nio-8080-exec-9] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:50:11.285+08:00 DEBUG 12304 --- [http-nio-8080-exec-9] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@82cd7d9]
+2023-12-28T12:50:11.286+08:00 DEBUG 12304 --- [http-nio-8080-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.szuse.f4.common.exception.ForbiddenException: Invalid seat id]
+2023-12-28T12:50:11.286+08:00 DEBUG 12304 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 403 FORBIDDEN
+2023-12-28T12:50:17.299+08:00 DEBUG 12304 --- [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : POST "/orders", parameters={}
+2023-12-28T12:50:17.300+08:00 DEBUG 12304 --- [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.OrderController#insertOrder(HttpServletRequest, Order)
+2023-12-28T12:50:17.301+08:00 DEBUG 12304 --- [http-nio-8080-exec-8] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.szuse.f4.model.Order@1d7522e6]
+2023-12-28T12:50:17.302+08:00 DEBUG 12304 --- [http-nio-8080-exec-8] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:50:17.302+08:00 DEBUG 12304 --- [http-nio-8080-exec-8] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@3d833627]
+2023-12-28T12:50:17.303+08:00 DEBUG 12304 --- [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-28T12:50:18.729+08:00 DEBUG 12304 --- [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : POST "/orders", parameters={}
+2023-12-28T12:50:18.730+08:00 DEBUG 12304 --- [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.OrderController#insertOrder(HttpServletRequest, Order)
+2023-12-28T12:50:18.731+08:00 DEBUG 12304 --- [http-nio-8080-exec-10] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.szuse.f4.model.Order@36946b]
+2023-12-28T12:50:18.776+08:00 DEBUG 12304 --- [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Failed to complete request: org.springframework.dao.DuplicateKeyException: 
+### Error updating database.  Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_5FD ON PUBLIC.TB_ORDER(SEAT_ID NULLS FIRST, APPOINTMENT_TIME NULLS FIRST) VALUES ( /* key:3 */ 1, TIMESTAMP '2089-09-18 19:50:00')"; SQL statement:
+INSERT INTO tb_order (user_id, seat_id, appointment_time) VALUES (?, ?, ?) [23505-214]
+### The error may exist in com/szuse/f4/mapper/OrderMapper.java (best guess)
+### The error may involve com.szuse.f4.mapper.OrderMapper.insertOrder-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO tb_order (user_id, seat_id, appointment_time) VALUES (?, ?, ?)
+### Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_5FD ON PUBLIC.TB_ORDER(SEAT_ID NULLS FIRST, APPOINTMENT_TIME NULLS FIRST) VALUES ( /* key:3 */ 1, TIMESTAMP '2089-09-18 19:50:00')"; SQL statement:
+INSERT INTO tb_order (user_id, seat_id, appointment_time) VALUES (?, ?, ?) [23505-214]
+; Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_5FD ON PUBLIC.TB_ORDER(SEAT_ID NULLS FIRST, APPOINTMENT_TIME NULLS FIRST) VALUES ( /* key:3 */ 1, TIMESTAMP '2089-09-18 19:50:00')"; SQL statement:
+INSERT INTO tb_order (user_id, seat_id, appointment_time) VALUES (?, ?, ?) [23505-214]
+2023-12-28T12:50:18.777+08:00 ERROR 12304 --- [http-nio-8080-exec-10] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DuplicateKeyException: 
+### Error updating database.  Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_5FD ON PUBLIC.TB_ORDER(SEAT_ID NULLS FIRST, APPOINTMENT_TIME NULLS FIRST) VALUES ( /* key:3 */ 1, TIMESTAMP '2089-09-18 19:50:00')"; SQL statement:
+INSERT INTO tb_order (user_id, seat_id, appointment_time) VALUES (?, ?, ?) [23505-214]
+### The error may exist in com/szuse/f4/mapper/OrderMapper.java (best guess)
+### The error may involve com.szuse.f4.mapper.OrderMapper.insertOrder-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO tb_order (user_id, seat_id, appointment_time) VALUES (?, ?, ?)
+### Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_5FD ON PUBLIC.TB_ORDER(SEAT_ID NULLS FIRST, APPOINTMENT_TIME NULLS FIRST) VALUES ( /* key:3 */ 1, TIMESTAMP '2089-09-18 19:50:00')"; SQL statement:
+INSERT INTO tb_order (user_id, seat_id, appointment_time) VALUES (?, ?, ?) [23505-214]
+; Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_5FD ON PUBLIC.TB_ORDER(SEAT_ID NULLS FIRST, APPOINTMENT_TIME NULLS FIRST) VALUES ( /* key:3 */ 1, TIMESTAMP '2089-09-18 19:50:00')"; SQL statement:
+INSERT INTO tb_order (user_id, seat_id, appointment_time) VALUES (?, ?, ?) [23505-214]] with root cause
+
+org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_5FD ON PUBLIC.TB_ORDER(SEAT_ID NULLS FIRST, APPOINTMENT_TIME NULLS FIRST) VALUES ( /* key:3 */ 1, TIMESTAMP '2089-09-18 19:50:00')"; SQL statement:
+INSERT INTO tb_order (user_id, seat_id, appointment_time) VALUES (?, ?, ?) [23505-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:508) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.index.Index.getDuplicateKeyException(Index.java:525) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.mvstore.db.MVSecondaryIndex.checkUnique(MVSecondaryIndex.java:223) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.mvstore.db.MVSecondaryIndex.add(MVSecondaryIndex.java:184) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.mvstore.db.MVTable.addRow(MVTable.java:519) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.command.dml.Insert.insertRows(Insert.java:174) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.command.dml.Insert.update(Insert.java:135) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.command.Command.executeUpdate(Command.java:252) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:254) ~[h2-2.1.214.jar:2.1.214]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47) ~[mybatis-3.5.11.jar:3.5.11]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74) ~[mybatis-3.5.11.jar:3.5.11]
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50) ~[mybatis-3.5.11.jar:3.5.11]
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117) ~[mybatis-3.5.11.jar:3.5.11]
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76) ~[mybatis-3.5.11.jar:3.5.11]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:194) ~[mybatis-3.5.11.jar:3.5.11]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425) ~[mybatis-spring-3.0.0.jar:3.0.0]
+	at jdk.proxy2/jdk.proxy2.$Proxy66.update(Unknown Source) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate.update(SqlSessionTemplate.java:288) ~[mybatis-spring-3.0.0.jar:3.0.0]
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:67) ~[mybatis-3.5.11.jar:3.5.11]
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:145) ~[mybatis-3.5.11.jar:3.5.11]
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86) ~[mybatis-3.5.11.jar:3.5.11]
+	at jdk.proxy2/jdk.proxy2.$Proxy79.insertOrder(Unknown Source) ~[na:na]
+	at com.szuse.f4.controller.OrderController.insertOrder(OrderController.java:112) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-6.0.12.jar:6.0.12]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-6.0.12.jar:6.0.12]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.12.jar:6.0.12]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884) ~[spring-webmvc-6.0.12.jar:6.0.12]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-6.0.12.jar:6.0.12]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.0.12.jar:6.0.12]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081) ~[spring-webmvc-6.0.12.jar:6.0.12]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.12.jar:6.0.12]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.12.jar:6.0.12]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.0.12.jar:6.0.12]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.13.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.12.jar:6.0.12]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.13.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.13.jar:10.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.0.12.jar:6.0.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.12.jar:6.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.0.12.jar:6.0.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.12.jar:6.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.0.12.jar:6.0.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.12.jar:6.0.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1740) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.13.jar:10.1.13]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2023-12-28T12:50:18.784+08:00 DEBUG 12304 --- [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2023-12-28T12:50:18.786+08:00 DEBUG 12304 --- [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2023-12-28T12:50:18.788+08:00 DEBUG 12304 --- [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:50:18.788+08:00 DEBUG 12304 --- [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Thu Dec 28 12:50:18 CST 2023, status=500, error=Internal Server Error, path=/orders}]
+2023-12-28T12:50:18.791+08:00 DEBUG 12304 --- [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 500
+2023-12-28T12:52:01.202+08:00  INFO 12304 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-28T12:52:01.204+08:00  INFO 12304 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-12-28T12:52:05.843+08:00  INFO 11332 --- [main] com.szuse.f4.LibManServerApplication     : Starting LibManServerApplication using Java 18.0.2.1 with PID 11332 (C:\Users\user\Downloads\se\se-lms\backend\lib-man-server\target\classes started by user in C:\Users\user\Downloads\se\se-lms\backend\lib-man-server)
+2023-12-28T12:52:05.844+08:00  INFO 11332 --- [main] com.szuse.f4.LibManServerApplication     : No active profile set, falling back to 1 default profile: "default"
+2023-12-28T12:52:06.429+08:00  INFO 11332 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-12-28T12:52:06.437+08:00  INFO 11332 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-28T12:52:06.437+08:00  INFO 11332 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
+2023-12-28T12:52:06.496+08:00  INFO 11332 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-28T12:52:06.497+08:00  INFO 11332 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 624 ms
+2023-12-28T12:52:06.514+08:00  INFO 11332 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-28T12:52:06.620+08:00  INFO 11332 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2023-12-28T12:52:06.621+08:00  INFO 11332 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-28T12:52:06.628+08:00  INFO 11332 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:mem:testdb'
+2023-12-28T12:52:06.801+08:00 DEBUG 11332 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-12-28T12:52:06.849+08:00 DEBUG 11332 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 20 mappings in 'requestMappingHandlerMapping'
+2023-12-28T12:52:06.858+08:00 DEBUG 11332 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-12-28T12:52:06.865+08:00 DEBUG 11332 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-12-28T12:52:06.908+08:00  INFO 11332 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-12-28T12:52:06.914+08:00  INFO 11332 --- [main] com.szuse.f4.LibManServerApplication     : Started LibManServerApplication in 1.344 seconds (process running for 1.544)
+2023-12-28T12:52:19.437+08:00  INFO 11332 --- [http-nio-8080-exec-4] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-12-28T12:52:19.438+08:00  INFO 11332 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-12-28T12:52:19.438+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2023-12-28T12:52:19.438+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2023-12-28T12:52:19.438+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2023-12-28T12:52:19.439+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@705c261f
+2023-12-28T12:52:19.439+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@7c69a33d
+2023-12-28T12:52:19.440+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2023-12-28T12:52:19.440+08:00  INFO 11332 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-12-28T12:52:19.442+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : POST "/users/user/login", parameters={}
+2023-12-28T12:52:19.449+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.UserController#login(HttpServletRequest, User)
+2023-12-28T12:52:19.500+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.szuse.f4.model.User@15a53d39]
+2023-12-28T12:52:19.547+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:52:19.548+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@9fda95b]
+2023-12-28T12:52:19.554+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-28T12:52:22.331+08:00 DEBUG 11332 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/orders/history", parameters={}
+2023-12-28T12:52:22.331+08:00 DEBUG 11332 --- [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.OrderController#getHistoryOrders(HttpServletRequest)
+2023-12-28T12:52:22.337+08:00 DEBUG 11332 --- [http-nio-8080-exec-9] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:52:22.337+08:00 DEBUG 11332 --- [http-nio-8080-exec-9] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@4300b954]
+2023-12-28T12:52:22.349+08:00 DEBUG 11332 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-28T12:54:18.340+08:00 DEBUG 11332 --- [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : POST "/orders", parameters={}
+2023-12-28T12:54:18.341+08:00 DEBUG 11332 --- [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.OrderController#insertOrder(HttpServletRequest, Order)
+2023-12-28T12:54:18.347+08:00 DEBUG 11332 --- [http-nio-8080-exec-10] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.szuse.f4.model.Order@2c28b4ca]
+2023-12-28T12:54:18.350+08:00 DEBUG 11332 --- [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler com.szuse.f4.common.exception.GlobalExceptionHandler#handleUnauthorizedException(UnauthorizedException)
+2023-12-28T12:54:18.350+08:00 DEBUG 11332 --- [http-nio-8080-exec-10] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:54:18.350+08:00 DEBUG 11332 --- [http-nio-8080-exec-10] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@226dfaa1]
+2023-12-28T12:54:18.351+08:00 DEBUG 11332 --- [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.szuse.f4.common.exception.UnauthorizedException: Please login first]
+2023-12-28T12:54:18.351+08:00 DEBUG 11332 --- [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 401 UNAUTHORIZED
+2023-12-28T12:54:22.083+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : POST "/users/user/login", parameters={}
+2023-12-28T12:54:22.084+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.UserController#login(HttpServletRequest, User)
+2023-12-28T12:54:22.084+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.szuse.f4.model.User@7b79c646]
+2023-12-28T12:54:22.085+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:54:22.086+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@6d1fadbe]
+2023-12-28T12:54:22.086+08:00 DEBUG 11332 --- [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-28T12:54:26.261+08:00 DEBUG 11332 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/orders", parameters={}
+2023-12-28T12:54:26.261+08:00 DEBUG 11332 --- [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.OrderController#insertOrder(HttpServletRequest, Order)
+2023-12-28T12:54:26.262+08:00 DEBUG 11332 --- [http-nio-8080-exec-9] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.szuse.f4.model.Order@5d438053]
+2023-12-28T12:54:26.265+08:00 DEBUG 11332 --- [http-nio-8080-exec-9] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:54:26.265+08:00 DEBUG 11332 --- [http-nio-8080-exec-9] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@1d2ff596]
+2023-12-28T12:54:26.266+08:00 DEBUG 11332 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-28T12:54:31.713+08:00 DEBUG 11332 --- [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/orders/history", parameters={}
+2023-12-28T12:54:31.714+08:00 DEBUG 11332 --- [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.OrderController#getHistoryOrders(HttpServletRequest)
+2023-12-28T12:54:31.716+08:00 DEBUG 11332 --- [http-nio-8080-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:54:31.716+08:00 DEBUG 11332 --- [http-nio-8080-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@1951e92d]
+2023-12-28T12:54:31.716+08:00 DEBUG 11332 --- [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-28T12:54:53.497+08:00 DEBUG 11332 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/orders?order_id=1", parameters={masked}
+2023-12-28T12:54:53.498+08:00 DEBUG 11332 --- [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.OrderController#getOrders(HttpServletRequest, int)
+2023-12-28T12:54:53.501+08:00 DEBUG 11332 --- [http-nio-8080-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:54:53.502+08:00 DEBUG 11332 --- [http-nio-8080-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@493206ca]
+2023-12-28T12:54:53.502+08:00 DEBUG 11332 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-28T12:55:02.011+08:00 DEBUG 11332 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/orders?order_id=1", parameters={masked}
+2023-12-28T12:55:02.012+08:00 DEBUG 11332 --- [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.OrderController#getOrders(HttpServletRequest, int)
+2023-12-28T12:55:02.013+08:00 DEBUG 11332 --- [http-nio-8080-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:55:02.013+08:00 DEBUG 11332 --- [http-nio-8080-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@1663f859]
+2023-12-28T12:55:02.014+08:00 DEBUG 11332 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-28T12:55:05.064+08:00 DEBUG 11332 --- [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/orders/history", parameters={}
+2023-12-28T12:55:05.065+08:00 DEBUG 11332 --- [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.OrderController#getHistoryOrders(HttpServletRequest)
+2023-12-28T12:55:05.067+08:00 DEBUG 11332 --- [http-nio-8080-exec-7] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:55:05.067+08:00 DEBUG 11332 --- [http-nio-8080-exec-7] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@6f0ceac5]
+2023-12-28T12:55:05.068+08:00 DEBUG 11332 --- [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-28T12:55:25.698+08:00 DEBUG 11332 --- [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/orders", parameters={}
+2023-12-28T12:55:25.698+08:00 DEBUG 11332 --- [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.OrderController#getOrders(HttpServletRequest, int)
+2023-12-28T12:55:25.701+08:00 DEBUG 11332 --- [http-nio-8080-exec-8] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:55:25.702+08:00 DEBUG 11332 --- [http-nio-8080-exec-8] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@68aa090c]
+2023-12-28T12:55:25.702+08:00 DEBUG 11332 --- [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-28T12:57:44.019+08:00 DEBUG 11332 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/areas?area_id=1", parameters={masked}
+2023-12-28T12:57:44.021+08:00 DEBUG 11332 --- [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.szuse.f4.controller.AreaController#getAreas(int)
+2023-12-28T12:57:44.022+08:00 DEBUG 11332 --- [http-nio-8080-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2023-12-28T12:57:44.023+08:00 DEBUG 11332 --- [http-nio-8080-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Writing [com.szuse.f4.common.ResponseJSON@1e0ee73]
+2023-12-28T12:57:44.024+08:00 DEBUG 11332 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2023-12-28T12:58:30.547+08:00  INFO 11332 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-28T12:58:30.548+08:00  INFO 11332 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

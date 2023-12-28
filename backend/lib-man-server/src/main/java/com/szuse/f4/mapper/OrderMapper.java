@@ -98,4 +98,7 @@ public interface OrderMapper {
   @Delete("DELETE FROM tb_order WHERE order_id = #{orderId}")
   void deleteOrderByOrderId(int orderId);
 
+  @Update("UPDATE tb_order SET order_status = 2 WHERE appointment_time < NOW() AND order_status = 0")
+  void updateExpiredOrders();
+
 }

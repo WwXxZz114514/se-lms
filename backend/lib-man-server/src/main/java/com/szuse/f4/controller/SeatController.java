@@ -1,7 +1,6 @@
 package com.szuse.f4.controller;
 
 import java.text.SimpleDateFormat;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Date;
@@ -14,10 +13,8 @@ import com.alibaba.fastjson2.JSONObject;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -30,9 +27,6 @@ public class SeatController {
 
   @Autowired
   private OrderMapper orderMapper;
-
-  @Autowired
-  private AreaMapper areaMapper;
 
   private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
