@@ -98,6 +98,11 @@ public class AreaController {
     } catch (Exception e) {
       throw new BadRequestException("Invalid area id");
     }
+    try {
+      seatMapper.deleteSeatsByAreaId(areaId);
+    } catch (Exception e) {
+      throw new BadRequestException("Invalid area id");
+    }
     return new ResponseJSON(200, "success");
   }
 

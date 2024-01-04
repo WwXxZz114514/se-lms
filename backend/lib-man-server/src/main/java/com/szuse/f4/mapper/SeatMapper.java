@@ -3,6 +3,7 @@ package com.szuse.f4.mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Result;
 import com.szuse.f4.model.Seat;
 
@@ -28,5 +29,8 @@ public interface SeatMapper {
       @Result(property = "areaId", column = "area_id")
   })
   Seat[] getSeatsByAreaId(int areaId);
+
+  @Delete("DELETE FROM tb_seat WHERE area_id = #{areaId}")
+  void deleteSeatsByAreaId(int areaId);
 
 }
